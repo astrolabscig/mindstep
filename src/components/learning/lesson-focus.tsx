@@ -260,34 +260,6 @@ export function LessonFocus({
       {/* closing card actions */}
       {isLast ? (
         <div className="relative mt-5 flex flex-col gap-3 rounded-card bg-white p-5 ring-1 ring-forest-100">
-          {/* celebratory burst on completion. Suppressed under reduced motion */}
-          {markedDone && !reduced ? (
-            <motion.div
-              aria-hidden="true"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="pointer-events-none absolute inset-0 overflow-hidden"
-            >
-              {[...Array(10)].map((_, i) => {
-                const angle = (i / 10) * Math.PI * 2;
-                return (
-                  <motion.span
-                    key={i}
-                    initial={{ x: "50%", y: "40%", scale: 0 }}
-                    animate={{
-                      x: `calc(50% + ${Math.cos(angle) * 80}px)`,
-                      y: `calc(40% + ${Math.sin(angle) * 36}px)`,
-                      scale: [0, 1, 0],
-                      opacity: [1, 1, 0],
-                    }}
-                    transition={{ duration: 0.9, delay: i * 0.03, ease: "easeOut" }}
-                    className={`absolute h-2 w-2 rounded-full ${i % 2 ? "bg-sage-strong" : "bg-quietblue-600/60"}`}
-                  />
-                );
-              })}
-            </motion.div>
-          ) : null}
           <div className="flex flex-wrap items-center gap-2">
             {markedDone ? (
               <Badge tone="positive">Lesson completed</Badge>

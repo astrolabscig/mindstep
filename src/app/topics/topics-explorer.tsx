@@ -10,7 +10,6 @@ import {
   type TopicCard,
 } from "@/content/cards";
 import { Art } from "@/components/visual/art";
-import { TopicMark } from "@/components/visual/topic-mark";
 import { ExplainerPlay } from "@/components/visual/explainer";
 import { SpeakButton } from "@/components/ui/speak-button";
 import { Card, CardBody } from "@/components/ui/card";
@@ -131,9 +130,9 @@ export function TopicsExplorer() {
                     transition={SPRING.snappy}
                   />
                 ) : null}
-                <span className="relative z-10 flex h-9 w-9 shrink-0 items-center justify-center">
-                  <TopicMark theme={item.id} size="sm" />
-                </span>
+                <div className="relative z-10 h-9 w-12 shrink-0 overflow-hidden rounded-lg bg-white ring-1 ring-white/80">
+                  <Art name={item.art} alt="" className="h-full w-full" imgClassName="object-cover" />
+                </div>
                 <span className="relative z-10 min-w-0">
                   <span className="block whitespace-nowrap text-sm font-medium lg:whitespace-normal">
                     {item.title}

@@ -24,24 +24,26 @@ below keeps the product firmly educational.
 
 ## Explicitly rejected from the reference
 
-- 3D anatomical heart and vitals panels → an abstract "calm mind" **three.js scene** was tried as the educational answer to the reference's 3D heart, and **retired on 2026-10-19 after user feedback ("the green blob is horrible")**: rendered as a low-poly blob rather than calm, it shipped extra API surface (`three` + drei/fiber) for one hero effect. Replaced with the **motion explainer system** (`src/components/visual/explainer-stage.tsx`): green CSS-animated concept scenes with captions and a bundled voice-over — plus the same unDraw illustration family used everywhere else. Educational intent unchanged: no clinical meaning, static under `prefers-reduced-motion`.
+- 3D anatomical heart and vitals panels → an abstract "calm mind" **three.js scene** was tried as the educational answer to the reference's 3D heart, and **retired on 2026-10-19 after user feedback ("the green blob is horrible")**: rendered as a low-poly blob rather than calm, it shipped extra API surface (`three` + drei/fiber) for one hero effect. Replaced with the **illustrated explainer system** (`src/components/visual/explainer-stage.tsx`): professional unDraw illustrations for each stage, with captions and a bundled voice-over. The custom CSS shape scenes were removed on 22 October 2026, so every visible illustration now comes from the online unDraw set. Educational intent unchanged: no clinical meaning, static under `prefers-reduced-motion`.
 - Appointment/doctor panels → no equivalent; MINDSTEP maps "next appointment" energy to its honest "Next up" chip and action planner.
 - Report-history tables → no health reports exist; progress tables stay strictly activity-based with explanations beside every number.
 
 ## Illustration sources (license honesty)
 
 - `public/art/*.svg` — the **unDraw** collection (open-licence illustration set by Katerina Limpitsouni; free for personal and commercial use, no attribution required). Fetched from `undraw.co` and recoloured to the MINDSTEP palette: teal `#1F9C96`, forest `#13302D`, deep ink `#0E2928`, mint `#E6F4EF` / `#EEF6F3`, hairline `#D3EBE4`, sea `#79C7BD`, with warm skin tones. The current source, page placement, and alt-text log is `docs/illustration-map.md`.
-- **These professional illustrations are now the ONLY visible illustration set.** The earlier hand-built SVG scene/spot families (`characters.tsx`, `illustration.tsx`) were retired and removed on 19 October 2026. On 21 October 2026 the remaining custom shape drawings (`book-leaves.svg`, `leaves-birds.svg`) and every other placeholder were replaced with a fresh 21-file unDraw set; illustrations now appear on the landing page, get-started, topics, dashboard, module/lesson, practice, support, progress, planner, safety, and research.
+- **These professional illustrations are now the ONLY visible illustration set.** The earlier hand-built SVG scene/spot families (`characters.tsx`, `illustration.tsx`) were retired and removed on 19 October 2026. On 21 October 2026 the remaining custom shape drawings (`book-leaves.svg`, `leaves-birds.svg`) and every other placeholder were replaced with a fresh 21-file unDraw set; illustrations now appear on the landing page, get-started, topics, dashboard, module/lesson, practice, support, progress, planner, safety, and research. On 22 October 2026 the last custom illustrative surfaces were removed: the explainer stages now render unDraw frames instead of CSS scenes, the hand-authored botanical haze and line-art topic marks were deleted, the completion confetti burst was removed, and the unused Next.js template SVGs were deleted. The brand mark/favicon and functional UI icons are identity/control assets, not editorial illustrations.
 - The design-supplied raster illustrations (sent over chat, 18–19 Oct) were NOT retrievable as files from the conversation; if the designer exports them into `public/art/` with the documented filenames (`art.tsx` in the codebase lists them), the app renders them under the same names and alt text — no code change.
 - UI library note: the tokens/patterns above were applied to our own Tailwind-based primitives (a shadcn-style token discipline) rather than installing a runtime component library wholesale — fewer dependencies for a demo build, honestly recorded here.
 
-## Motion-explainer system (added 19 October 2026)
-Concepts are now taught with **animated scenes + voice**, not paragraphs:
+## Illustrated explainer system (updated 22 October 2026)
+Concepts are taught with **professional unDraw illustrations + voice**, not
+custom shapes:
 
-- `src/components/visual/explainer-stage.tsx` renders 7 pure-DOM concept scenes in
-  the brand palette only (`#e4f7d2/#b8f28b/#96d45f` planes on `#dcebe8` cards,
-  ink `#16403d`) — soft rounded shapes, gentle transitions. Every scene is
-  aria-hidden; the **stage captions are the accessible content** (`aria-live`).
+- `src/components/visual/explainer-stage.tsx` renders one unDraw illustration
+  per stage from `public/art`, with a short cross-fade and the brand mint
+  background. It no longer draws people, circles, rings, or floating balls in
+  CSS. Every scene is aria-hidden; the **stage captions are the accessible
+  content** (`aria-live`).
 - `src/components/visual/explainer.tsx` (`ExplainerPlay`) drives step captions
   (~3.2 s each) + plays the scene's **bundled Piper voice-over MP3**
   (`public/voice/motion/*.mp3`, generated by `scripts/generate-voice-motion.ts`,
@@ -51,9 +53,12 @@ Concepts are now taught with **animated scenes + voice**, not paragraphs:
   `conversation` (side-by-side, listen > fix) · `young-person` (the next hour) ·
   `loop` (understand → practise → next step; also the landing hero explainer).
 - Placement: landing hero (`loop`) + topic cards with an attached `motion`
-  scene in `src/content/cards.ts` (8 of 12).
-- All continuous keyframes in `globals.css` (`ms-ring`, `ms-breath`, `ms-jitter`,
-  `ms-drift`, `ms-pulse`) collapse to static frames under `prefers-reduced-motion`.
+  scene in `src/content/cards.ts`.
+- Stage changes use Framer Motion opacity/scale only; under
+  `prefers-reduced-motion`, stage 0 is shown as a still illustration. The old
+  `ms-ring`, `ms-breath`, `ms-jitter`, `ms-drift`, and `ms-pulse` CSS vocabulary
+  was deleted with the custom scenes.
+- Frame map: `docs/illustration-map.md` §Explainer frames.
 
 ## Reference 2 — Cadabra.Studio "Medical App Tablet" (added 20 October 2026)
 
@@ -69,9 +74,6 @@ take the *feel*, reject the clinical metaphors.
 - **Teal accent family** (`--color-teal #1f9c96`, `--color-teal-600 #157a74`);
   the legacy `quietblue` token now maps to these values, so all links, labels
   and accent chips re-tint without component rewrites.
-- **Botanical haze**: `src/components/visual/botanical.tsx` — oversized,
-  low-contrast leaf shapes behind the hero and the topics banner
-  (decorative, aria-hidden, pointer-events-none).
 - **Rounded mint banner** on `/topics` (header sits in a soft card, matching
   the reference's "choose a doctor" band).
 - **Compact theme explorer** on `/topics`: nine theme tabs and card tabs swap
@@ -86,6 +88,10 @@ take the *feel*, reject the clinical metaphors.
 - Photo avatars / doctor cards — we keep illustration + type, no invented people.
 - Bottom-right floating action button — the always-visible "Need help now?"
   chip already serves that role without hiding actions behind an icon.
+- Custom botanical haze (`botanical.tsx`) — the hand-authored leaf SVG was
+  removed on 22 October 2026 because it was not an internet-sourced
+  illustration. The mint gradient and the unDraw family carry the same visual
+  warmth without a bespoke drawing.
 
 ## Logo and favicon (added 20 October 2026)
 

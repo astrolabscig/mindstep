@@ -1,9 +1,11 @@
 /**
- * Motion explainers. Animated, green-palette concept scenes with voice.
+ * Illustrated explainers. Professional unDraw scenes with voice.
  *
  * Visual safety rules (same bar as the rest of the app):
- *  - pure CSS keyframe + transition animation only (no rAF loops);
- *  - every animation part has a `prefers-reduced-motion` static frame;
+ *  - every frame is an internet-sourced unDraw illustration, never a custom
+ *    CSS drawing of people, circles, or balls;
+ *  - stage changes are short cross-fades with a static first frame under
+ *    `prefers-reduced-motion`;
  *  - everything decorative is aria-hidden; the *caption text* is the
  *    accessible content and is what a screen reader reads;
  *  - the voice is the bundled offline Piper MP3 (server fallback TTS if a

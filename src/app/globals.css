@@ -94,50 +94,6 @@ html {
   }
 }
 
-/* ── Motion-explainer vocabulary (concept scenes) ─────────────────
-   Pure CSS + Tailwind transitions, zero JS per frame. All continuous
-   loops collapse to a static frame under prefers-reduced-motion;
-   step-driven states are plain transitions (acceptable under reduce). */
-@keyframes ms-ring {
-  0%   { transform: scale(0.55); opacity: 0.9; }
-  100% { transform: scale(1.6); opacity: 0; }
-}
-@keyframes ms-breath {
-  0%, 100% { transform: scale(1); }
-  45%      { transform: scale(1.14); }
-  60%      { transform: scale(0.96); }
-}
-@keyframes ms-jitter {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  30%      { transform: translate(-1.5px, 1px) rotate(-1deg); }
-  70%      { transform: translate(1.5px, -1px) rotate(1deg); }
-}
-@keyframes ms-drift {
-  0%   { top: calc(50% - 7px); left: calc(50% - 7px); opacity: 0.35; }
-  35%  { top: 18%; left: 68%; opacity: 1; }
-  70%  { top: 64%; left: 22%; opacity: 0.7; }
-  100% { top: calc(50% - 7px); left: calc(50% - 7px); opacity: 0.35; }
-}
-@keyframes ms-pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.4; }
-}
-.animate-motion-ring   { will-change: transform, opacity; animation: ms-ring 3.3s ease-out infinite; }
-.animate-motion-breath { will-change: transform; animation: ms-breath 6s ease-in-out infinite; }
-.animate-motion-jitter { will-change: transform; animation: ms-jitter 1.6s ease-in-out infinite; }
-.animate-motion-drift  { will-change: top, left, opacity; animation: ms-drift 6s ease-in-out infinite; }
-.animate-motion-pulse  { animation: ms-pulse 1.8s ease-in-out infinite; }
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-motion-ring,
-  .animate-motion-breath,
-  .animate-motion-jitter,
-  .animate-motion-drift,
-  .animate-motion-pulse {
-    animation: none;
-  }
-}
-
 body {
   background: var(--color-canvas);
   color: var(--color-ink);

@@ -1,5 +1,4 @@
 import { cards, themes } from "@/content/cards";
-import { Botanical } from "@/components/visual/botanical";
 import { TopicsExplorer } from "./topics-explorer";
 
 /**
@@ -16,7 +15,6 @@ export default function TopicsPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-10">
       <header className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#e4f3ee] via-[#f1f9f5] to-[#f7fbf9] px-5 py-7 ring-1 ring-[#d3ebe4] sm:px-8 sm:py-9">
-        <Botanical />
         <div className="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-600">

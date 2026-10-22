@@ -93,11 +93,14 @@ export function hasArt(): boolean {
 export function Art({
   name,
   className,
+  imgClassName,
   priority,
   alt,
 }: {
   name: ArtName;
   className?: string;
+  /** Extra classes for the rendered image, e.g. object-cover for a thumbnail. */
+  imgClassName?: string;
   priority?: boolean;
   /** Override the register alt text, e.g. pass "" for a decorative thumbnail. */
   alt?: string;
@@ -110,7 +113,7 @@ export function Art({
         fill
         sizes="(max-width: 640px) 90vw, 360px"
         priority={priority}
-        className="object-contain"
+        className={cn("object-contain", imgClassName)}
       />
     </div>
   );

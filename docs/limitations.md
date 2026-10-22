@@ -86,9 +86,12 @@ AA, unverified" — not as a claim of conformance.
   teal/forest/mint palette. The set covers the landing page, get-started,
   topics, dashboard, module/lesson, practice, support, progress, planner, safety,
   and research (see `docs/illustration-map.md`).
+  Every visible editorial illustration is from this set; the custom CSS scene
+  shapes, botanical haze, line-art topic marks, completion confetti, and unused
+  Next.js template SVGs were removed on 22 October 2026.
   The earlier three.js "calm mind" hero scene was removed on user feedback
-  (2026-10-19) and replaced by the motion-explainer system (`docs/ui-spec.md`),
-  which animates concepts with pure CSS scenes + bundled voice-overs
+  (2026-10-19) and replaced by the illustrated explainer system
+  (`docs/ui-spec.md`), which shows unDraw frames with bundled voice-overs
   (`public/voice/motion/*.mp3`, same offline Piper engine).
   Idle float/sway animations
   are pure CSS and fully disabled under `prefers-reduced-motion`. They are

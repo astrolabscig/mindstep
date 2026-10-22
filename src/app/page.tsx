@@ -8,7 +8,6 @@ import { supportServices } from "@/content/support-services";
 import { ScenarioPreview } from "@/components/landing/scenario-preview";
 import { ExplainerPlay } from "@/components/visual/explainer";
 import { Art } from "@/components/visual/art";
-import { Botanical } from "@/components/visual/botanical";
 import { SectionReveal } from "@/components/ui/section-reveal";
 import { SupportPreview } from "@/components/landing/support-preview";
 
@@ -40,7 +39,6 @@ export default function LandingPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-mint-200/80 bg-gradient-to-b from-[#e4f3ee] via-[#f1f8f5] to-canvas">
-        <Botanical />
         <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
           <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
             <div className="prose-readable max-w-2xl">

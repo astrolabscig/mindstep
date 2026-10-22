@@ -8,7 +8,7 @@ import { MOTION, motionVoicePath, type ExplainName } from "./explainers";
 import { ExplainerStage } from "./explainer-stage";
 
 /**
- * A motion explainer: animated concept scene + stage captions + voice.
+ * An illustrated explainer: professional unDraw scene + stage captions + voice.
  *
  * Reads its layout no-JS: on a server render you get stage 0 with the play
  * control; clicking advances the scene and plays the bundled voice-over.
@@ -129,7 +129,7 @@ export function ExplainerPlay({
         </button>
         <span aria-hidden="true" className={cn("flex gap-1", playing ? "" : "opacity-40")}>
           {spec.steps.map((_, i) => (
-            <span key={i} className={cn("h-1.5 w-1.5 rounded-full", i === (playing ? step : 0) ? "bg-forest" : "bg-forest/20")} />
+            <span key={i} className={cn("h-1 w-4 rounded-full", i === (playing ? step : 0) ? "bg-forest" : "bg-forest/20")} />
           ))}
         </span>
       </div>

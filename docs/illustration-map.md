@@ -10,6 +10,13 @@ All SVGs were downloaded from the unDraw CDN, recoloured to the MINDSTEP
 palette, and committed in `public/art/`. The app reads them through
 `src/components/visual/art.tsx`; no third-party request happens at runtime.
 
+**Source rule:** every visible editorial illustration in MINDSTEP is an unDraw
+asset in `public/art/`. The earlier custom CSS scenes (including floating
+circles and balls), the hand-authored botanical haze, the line-art topic marks,
+and the completion confetti were removed on 22 October 2026. The MINDSTEP brand
+mark (`src/components/visual/logo.tsx`, `src/app/icon.svg`) and functional UI
+icons are identity/control assets, not editorial illustrations.
+
 ## Palette
 
 | Role | Hex |
@@ -55,14 +62,31 @@ tints. White remains white for the illustrations' negative space.
 | `hero-calm` | `/art/hero-calm.svg` | [Step to the sun](https://undraw.co/illustration/step-to-the-sun_wp49) | Landing hero | Illustration: a person holding a sun, representing a hopeful next step |
 | `loop` | `/art/loop.svg` | [Completed steps](https://undraw.co/illustration/completed-steps_ngu7) | Landing "How MINDSTEP works" header | Illustration: a person moving through a short checklist of steps |
 
+## Explainer frames
+
+The seven illustrated explainers (`src/components/visual/explainer-stage.tsx`)
+use only the unDraw art above. Each stage cross-fades to the next; with
+`prefers-reduced-motion`, stage 0 stays still.
+
+| Explainer | Stage 0 | Stage 1 | Stage 2 |
+|---|---|---|---|
+| `breathe` | `breathing-woman` | `breathing-woman` | — |
+| `overwhelm` | `overwhelmed` | `worry-ideas` | `take-a-break` |
+| `breath-lows` | `low-mood` | `progress-path` | — |
+| `worry-locate` | `worry-ideas` | `breathing-woman` | `breathing-woman` |
+| `conversation` | `friends-talking` | `role-play` | `friends-talking` |
+| `young-person` | `low-mood` | `you-matter` | `hero-calm` |
+| `loop` | `loop` | `role-play` | `plan-steps` |
+
 ## Page placement
 
 - **Landing** (`/`): hero illustration, loop-section illustration, one
   illustration in each of the six featured theme cards, support section,
   research strip.
 - **Get started** (`/get-started`): welcome illustration above the questions.
-- **Topics** (`/topics`): theme banner art and card art; the compact explorer
-  swaps one theme/card at a time.
+- **Topics** (`/topics`): unDraw theme thumbnails in the theme rail, theme
+  banner art, card art, and unDraw frames inside cards with an explainer; the
+  compact explorer swaps one theme/card at a time.
 - **Dashboard** (`/learn`): continue-card art, practice-card art, module art, and
   recommendation empty-state art.
 - **Module and lesson** (`/learn/[slug]`, `/lesson/[lessonId]`): module art and
@@ -80,9 +104,9 @@ tints. White remains white for the illustrations' negative space.
 
 `/topics` is a theme-first explorer: the nine theme buttons swap the active
 theme, and the card tabs swap the active card, instead of anchor-scrolling
-through every card. The theme illustration sits in the theme banner; cards with
-a motion explainer keep that explainer, and cards without one show their
-illustration.
+through every card. The theme illustration sits in the theme banner and a small
+unDraw crop in the theme rail; cards with an explainer show its unDraw frames,
+and cards without one show their illustration.
 
 ## Replacing an illustration
 
