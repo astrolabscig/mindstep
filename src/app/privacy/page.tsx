@@ -93,17 +93,17 @@ export default async function PrivacyPage() {
         <h2 id="access-rules-h" className="text-xl font-semibold text-forest">Who can see your data</h2>
         <p className="mt-3 text-sm leading-relaxed text-mist">
           Your progress is tied to your session cookie and looked up on the server only. No request
-          from the browser can reach another visitor&apos;s record. People with the admin key can
-          manage content (publishing cards, checking services) and see an audit log of those
-          changes, but not your learning progress. The full access design, its limitations, and the
-          production upgrade path are in docs/safety-and-privacy.md in the repository.
+          from the browser can reach another visitor&apos;s record. There is no admin login or
+          moderator account: content changes happen in the code and shipping process, not through a
+          browser. The full access design, its limitations, and the production upgrade path are in
+          docs/safety-and-privacy.md in the repository.
         </p>
       </section>
 
       <Callout tone="caution" title="Limits in this build (honest scope)" className="mt-8">
-        This is a local-mode demo: single-file storage, no encryption at rest, and a shared secret
-        for admin access. It shows the design, not a certified production deployment. Read
-        docs/limitations.md before assuming any clinical, legal, or compliance use.
+        This is a local-mode demo: single-file storage and no encryption at rest. It shows the
+        design, not a certified production deployment. Read docs/limitations.md before assuming any
+        clinical, legal, or compliance use.
       </Callout>
     </div>
   );

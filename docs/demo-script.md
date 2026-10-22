@@ -1,7 +1,6 @@
 # Demo / Evaluation Script
 
-Estimated time: 12–15 minutes. Requires no environment variables (except
-`ADMIN_KEY` for the admin part — set it in `.env.local` first if desired).
+Estimated time: 10–12 minutes. Requires no environment variables.
 
 ```bash
 npm run seed:demo     # clean data + demo progress; note the printed ms_sid
@@ -46,14 +45,10 @@ the loop below creates your own data live.
    crisis — that's stated, not hidden).
 10. **Privacy (`/privacy`).** Read what's stored; press **Delete my data** and
     confirm: progress visibly resets (visit `/progress` to confirm empty).
-11. **Admin (`/admin`, optional).** Enter `ADMIN_KEY`; toggle a lesson
-    publish/unpublish; re-verify a service; then check the revision log at the
-    bottom — all actions annotated with actor + timestamp.
-12. **Quality gates from the terminal** (optional but quick):
+11. **Quality gates from the terminal** (optional but quick):
     `npm run typecheck` · `npm run lint` · `npm test` · `npm run build`.
 
 ## If something breaks mid-demo
 
 - Content/data weirdness → `npm run seed:demo` reloads a known-good register
   without restarting the dev server.
-- Unknown admin key → `.env.local` needs `ADMIN_KEY` (see `.env.example`).

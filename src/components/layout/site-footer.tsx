@@ -23,7 +23,6 @@ const groups = [
     links: [
       { href: "/privacy", label: "Privacy" },
       { href: "/accessibility", label: "Accessibility" },
-      { href: "/admin", label: "Admin" },
     ],
   },
 ];

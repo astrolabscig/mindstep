@@ -71,6 +71,5 @@ describe("content integrity", () => {
   it("default database shape is a valid empty register", () => {
     expect(DEFAULT_DB.version).toBe(1);
     expect(Object.keys(DEFAULT_DB.profiles)).toHaveLength(0);
-    expect(DEFAULT_DB.overrides.unpublishedLessonIds).toEqual([]);
   });
 });

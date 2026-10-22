@@ -18,7 +18,6 @@ import { cookies } from "next/headers";
  */
 
 export const SESSION_COOKIE = "ms_sid";
-export const ADMIN_COOKIE = "ms_admin";
 
 export function newProfileId(): string {
   return crypto.randomUUID();
@@ -34,11 +33,6 @@ export async function readSessionProfileId(): Promise<string | null> {
   return value && /^[a-f0-9-]{36}$/.test(value) ? value : null;
 }
 
-export async function readAdminFlag(): Promise<boolean> {
-  const jar = await cookies();
-  return jar.get(ADMIN_COOKIE)?.value === "1";
-}
-
 export async function setSessionCookie(profileId: string) {
   const jar = await cookies();
   jar.set(SESSION_COOKIE, profileId, {
@@ -48,34 +42,4 @@ export async function setSessionCookie(profileId: string) {
     path: "/",
     maxAge: 60 * 60 * 24 * 90, // 90-day learner session
   });
-}
-
-export async function setAdminCookie() {
-  const jar = await cookies();
-  jar.set(ADMIN_COOKIE, "1", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 8, // 8-hour admin session
-  });
-}
-
-export async function clearAdminCookie() {
-  const jar = await cookies();
-  jar.delete(ADMIN_COOKIE);
-}
-
-/* ── Admin authorisation ───────────────────────────────────── */
-
-export function adminKeyConfigured(): boolean {
-  return typeof process.env.ADMIN_KEY === "string" && process.env.ADMIN_KEY.length >= 8;
-}
-
-export function validateAdminKey(candidate: string): boolean {
-  const expected = process.env.ADMIN_KEY;
-  if (!expected) return false;
-  const a = Buffer.from(candidate);
-  const b = Buffer.from(expected);
-  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }

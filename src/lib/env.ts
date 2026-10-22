@@ -26,10 +26,7 @@ export function isLocalMode(): boolean {
 }
 
 export function configSummary() {
-  return {
-    mode: persistenceMode(),
-    adminConfigured: typeof process.env.ADMIN_KEY === "string" && process.env.ADMIN_KEY.length >= 8,
-  };
+  return { mode: persistenceMode() };
 }
 
 export function requiredEnvVar(name: string): string {

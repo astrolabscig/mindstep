@@ -30,9 +30,8 @@
 
 - There is no account system, so the app never stores a name, email address, or
   password hash.
-- The admin key never grants access to learner content; it only gates content
-  moderation (lesson publish state, service verification), all logged in
-  `revisions[]`.
+- There is no admin key, moderator account, or browser-based content editor.
+  Content changes are code changes shipped with the app.
 
 ## Deletion
 
@@ -47,8 +46,6 @@ production backend existed, this function would be the deletion entry point in
 
 - Single-file JSON storage: no encryption at rest, no per-field ACLs, no
   multi-user concurrency control beyond atomic renames.
-- The admin key is a shared secret compared by the server; no per-moderator
-  identities, no 2FA.
 - Local mode data lives in plaintext on the machine running the server.
 - No formal security audit, no penetration testing, no WCAG audit with AT
   users has been performed on this build.

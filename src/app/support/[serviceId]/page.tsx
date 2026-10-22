@@ -1,12 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { serviceById } from "@/content";
-import { readDb } from "@/lib/store/file-store";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardBody } from "@/components/ui/card";
 import { Callout } from "@/components/ui/callout";
-import { z } from "zod";
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ serviceId: string }> }) {
   const { serviceId } = await params;
@@ -14,24 +11,10 @@ export async function generateMetadata({ params }: { params: Promise<{ serviceId
   return { title: service ? service.name : "Service" };
 }
 
-const historySchema = z.array(
-  z.object({
-    id: z.string(),
-    serviceId: z.string(),
-    status: z.enum(["verified", "awaiting-verification"]),
-    verifiedAt: z.string(),
-    note: z.string(),
-    sourceTitle: z.string(),
-    sourceUrl: z.string(),
-  }),
-);
-
 export default async function ServiceDetailPage({ params }: { params: Promise<{ serviceId: string }> }) {
   const { serviceId } = await params;
   const service = serviceById(serviceId);
   if (!service) notFound();
-
-  const verifications = historySchema.parse(readDb().verifications).filter((v) => v.serviceId === service.id);
 
   const rows: { label: string; value: string | null; note?: string }[] = [
     { label: "Phone", value: service.phone, note: service.phoneNote ?? undefined },
@@ -97,15 +80,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </a>
           . {service.verification.note}
         </p>
-        {verifications.length > 0 ? (
-          <ul className="mt-3 flex flex-col gap-1.5 text-xs">
-            {verifications.map((v) => (
-              <li key={v.id}>
-                {v.verifiedAt}. Marked <strong>{v.status === "verified" ? "verified" : "awaiting verification"}</strong>: {v.note}
-              </li>
-            ))}
-          </ul>
-        ) : null}
       </Callout>
 
       <Callout tone="safety" title="Safety note" className="mt-4">

@@ -28,19 +28,9 @@ const wantDemo = process.argv.includes("--demo");
 type Db = {
   version: 1;
   profiles: Record<string, unknown>;
-  verifications: unknown[];
-  revisions: { id: string; at: string; actor: string; action: string; summary: string }[];
-  overrides: { unpublishedLessonIds: string[] };
 };
 
 const db = structuredClone(DEFAULT_DB) as Db;
-db.revisions.push({
-  id: `rev_${crypto.randomBytes(8).toString("hex")}`,
-  at: new Date().toISOString(),
-  actor: "seed",
-  action: "seed",
-  summary: `Database seeded by scripts/seed.ts at ${new Date().toISOString()}${wantDemo ? " (with demo profile)" : ""}.`,
-});
 
 if (wantDemo) {
   const id = crypto.randomUUID();
@@ -65,13 +55,6 @@ if (wantDemo) {
     ],
     preferences: {},
   };
-  db.revisions.push({
-    id: `rev_${crypto.randomBytes(8).toString("hex")}`,
-    at: new Date().toISOString(),
-    actor: "seed",
-    action: "seed-demo-profile",
-    summary: `Added demo profile — set cookie ms_sid=${id} to browse as the demo user.`,
-  });
   console.log(`Demo profile session id (set cookie ms_sid to this): ${id}`);
 }
 

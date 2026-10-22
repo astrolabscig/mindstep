@@ -149,4 +149,4 @@ The newer condition cards follow the same rule: each describes a pattern in plai
 | Mental Health Authority head office (Accra) | **verified (contact as published on mha-ghana.com)** · address detail `awaiting verification` | R7 |
 | Other facilities/directories named online | **not listed** unless verifiable via R4/R7; authoritative external directories linked instead | — |
 
-The directory UI renders each service's verification status, verification date and source link. Re-verification is an administrative workflow (`/admin` → services → re-verify, which appends to `service_verifications`).
+The directory UI renders each service's verification status, verification date and source link. Re-verification is a content-maintenance task: the source and checked date are updated in the service record with the app change.

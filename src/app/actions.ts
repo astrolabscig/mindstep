@@ -8,12 +8,8 @@ import {
   setSessionCookie,
   newProfileId,
   newRecordId,
-  validateAdminKey,
-  readAdminFlag,
-  setAdminCookie,
-  clearAdminCookie,
 } from "@/lib/session";
-import { serviceById, questionById, questionsOfModule, moduleBySlug, lessonById, scenarioById } from "@/content";
+import { questionById, questionsOfModule, moduleBySlug, lessonById, scenarioById } from "@/content";
 import { evaluateAnswer, scoreAttempt, missedQuestions, type AnsweredQuestion } from "@/lib/domain/quiz";
 
 /**
@@ -64,14 +60,6 @@ const scenarioRunSchema = z.object({
   scenarioId: idSchema,
   worstQuality: z.enum(["best", "acceptable", "poor"]),
   walked: z.number().int().min(1).max(200),
-});
-
-const adminKeySchema = z.object({ key: z.string().min(1).max(200) });
-
-const adminVerifySchema = z.object({
-  serviceId: idSchema,
-  status: z.enum(["verified", "awaiting-verification"]),
-  note: z.string().trim().min(5).max(500),
 });
 
 /* ── Onboarding & preferences ──────────────────────────────── */
@@ -228,82 +216,6 @@ export async function deleteMyData(): Promise<{ ok: boolean }> {
   if (!id) return { ok: true };
   await withProfile((pid, db) => {
     deleteProfileData(db, pid);
-  });
-  return { ok: true };
-}
-
-/* ── Admin ─────────────────────────────────────────────────── */
-
-export async function adminLogin(input: unknown): Promise<{ ok: boolean; error?: string }> {
-  const parsed = adminKeySchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "Enter the admin key." };
-  if (!validateAdminKey(parsed.data.key)) return { ok: false, error: "Key rejected. Ask your project lead." };
-  await setAdminCookie();
-  return { ok: true };
-}
-
-export async function adminLogout(): Promise<{ ok: boolean }> {
-  await clearAdminCookie();
-  return { ok: true };
-}
-
-/* ── Admin content management ──────────────────────────────── */
-
-/** Publish/unpublish a lesson (content overrides, revision-logged). */
-export async function adminSetLessonPublished(lessonId: string, published: boolean): Promise<{ ok: boolean }> {
-  if (!idSchema.safeParse(lessonId).success) return { ok: false };
-  const lesson = lessonById(lessonId);
-  if (!lesson) return { ok: false };
-  if (!(await readAdminFlag())) return { ok: false };
-  readDbAndApply((db) => {
-    const set = new Set(db.overrides.unpublishedLessonIds);
-    if (published) {
-      set.delete(lessonId);
-    } else {
-      set.add(lessonId);
-    }
-    db.overrides.unpublishedLessonIds = Array.from(set);
-    db.revisions.push({
-      id: newRecordId("rev"),
-      at: new Date().toISOString(),
-      actor: "admin",
-      action: published ? "publish-lesson" : "unpublish-lesson",
-      summary: `Lesson "${lesson.title}" set to ${published ? "published" : "unpublished"}.`,
-    });
-  });
-  return { ok: true };
-}
-
-function readDbAndApply(fn: (db: Db) => void): void {
-  const db = readDb();
-  fn(db);
-  persist(db);
-}
-
-export async function adminVerifyService(input: unknown): Promise<{ ok: boolean }> {
-  const parsed = adminVerifySchema.safeParse(input);
-  if (!parsed.success) return { ok: false };
-  if (!(await readAdminFlag())) return { ok: false };
-  const service = serviceById(parsed.data.serviceId);
-  if (!service) return { ok: false };
-  await withProfile((id, db) => {
-    void id;
-    db.verifications.push({
-      id: newRecordId("vf"),
-      serviceId: parsed.data.serviceId,
-      status: parsed.data.status,
-      verifiedAt: new Date().toISOString().slice(0, 10),
-      note: parsed.data.note,
-      sourceTitle: service.verification.sourceTitle,
-      sourceUrl: service.verification.sourceUrl,
-    });
-    db.revisions.push({
-      id: newRecordId("rev"),
-      at: new Date().toISOString(),
-      actor: "admin",
-      action: "verify-service",
-      summary: `${service.name}: marked ${parsed.data.status}, ${parsed.data.note}`,
-    });
   });
   return { ok: true };
 }

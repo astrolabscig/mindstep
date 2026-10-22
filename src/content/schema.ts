@@ -188,23 +188,3 @@ export const supportServiceSchema = z.object({
   accessibility: z.string().min(10).nullable(),
   verification: verificationSchema,
 });
-
-/* ── Upserts for admin ───────────────────────────────────── */
-
-export const publishToggleSchema = z.object({
-  contentId: z.string().min(3),
-  contentType: z.enum(["lesson", "service"]),
-  published: z.boolean(),
-});
-export type PublishToggle = z.infer<typeof publishToggleSchema>;
-
-export const actionPlanItemSchema = z.object({
-  id: z.string(),
-  kind: z.enum(["identify-trusted-person", "prepare-questions", "plan-conversation", "revisit-lesson", "reflection", "custom-goal"]),
-  title: z.string().min(3),
-  detail: z.string().max(2000).optional().default(""),
-  done: z.boolean(),
-  createdAt: z.string(),
-  doneAt: z.string().nullable(),
-});
-export type ActionPlanItem = z.infer<typeof actionPlanItemSchema>;

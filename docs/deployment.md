@@ -12,9 +12,8 @@ npm run dev             # dev: http://localhost:3000
 npm run build && npm start   # production build served from .next
 ```
 
-No environment variables are required in local mode. `ADMIN_KEY` (≥ 8 chars)
-is needed only if the moderation area is part of the demo; without it `/admin`
-shows why it is disabled and all admin actions are rejected server-side.
+No environment variables are required in local mode, and there is no admin
+login or moderation back office to configure.
 
 ## What we actually deployed vs. what we did not
 

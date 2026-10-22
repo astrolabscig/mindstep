@@ -50,16 +50,11 @@ describe("profile access rules (static audits)", () => {
     expect(src).toContain('sameSite: "lax"');
   });
 
-  it("admin actions re-verify the admin cookie server-side", () => {
-    const src = readRepo("src/app/actions.ts");
-    // each of the two admin-content actions must gate on readAdminFlag()
-    expect((src.match(/readAdminFlag\(\)/g) ?? []).length).toBeGreaterThanOrEqual(2);
-  });
-
-  it("ships with no account or planner routes", () => {
+  it("ships with no account, planner, or admin routes", () => {
     const root = path.resolve(__dirname, "..");
     expect(fs.existsSync(path.join(root, "src", "app", "account"))).toBe(false);
     expect(fs.existsSync(path.join(root, "src", "app", "planner"))).toBe(false);
+    expect(fs.existsSync(path.join(root, "src", "app", "admin"))).toBe(false);
   });
 });
 
@@ -67,7 +62,5 @@ describe("default database shape", () => {
   it("ships empty and isolated — no baked-in profiles that could leak", () => {
     expect(DEFAULT_DB.version).toBe(1);
     expect(Object.keys(DEFAULT_DB.profiles)).toHaveLength(0);
-    expect(DEFAULT_DB.verifications).toEqual([]);
-    expect(DEFAULT_DB.overrides.unpublishedLessonIds).toEqual([]);
   });
 });

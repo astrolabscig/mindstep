@@ -39,9 +39,9 @@ certified clinical, privacy, or accessibility product.
   not sufficient; the adapter, schema, and verified deployment are future
   work (docs/architecture.md). No part of this build claims cloud
   persistence.
-- **Sessions are cookie-based and admin key is a shared secret** — fine for a
-  classroom demo; not fine for production (no per-moderator identity, 2FA,
-  session revocation, or rate limiting on auth endpoints in this build).
+- **Sessions are cookie-based guest sessions** — fine for a classroom demo;
+  not fine for production (no session revocation or request rate limiting in
+  this build).
 - `npm audit` has 5 high-severity findings in the dev-only ESLint chain
   (documented in docs/qa-report.md — deliberately not force-fixed).
 - No e2e/browser tests; unit coverage is over content integrity, domain logic,

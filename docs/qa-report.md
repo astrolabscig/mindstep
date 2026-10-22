@@ -10,8 +10,8 @@ expected values, not aspirational ones.
 | --- | --- | --- |
 | Types | `npx tsc --noEmit` | 0 errors (strict) |
 | Lint | `npx eslint` | 0 errors, 0 warnings |
-| Tests | `npx vitest run` | **6 files, 46 tests, all passing** |
-| Build | `npm run build` | Clean production build; 19 routes (9 static, 10 server-rendered) |
+| Tests | `npx vitest run` | **6 files, 45 tests, all passing** |
+| Build | `npm run build` | Clean production build; 18 routes |
 
 Test suites:
 
@@ -22,7 +22,7 @@ Test suites:
 | `tests/scenario-graph.test.ts` | Branch graphs: dangling refs, terminal reachability, feedback completeness | 4 |
 | `tests/progress.test.ts` | Progress metrics; honesty strings ("knowledge indicator only") | 5 |
 | `tests/points.test.ts` | Point-by-point card extraction: verbatim key lines, summary cards, all real lessons | 7 |
-| `tests/access-control.test.ts` | Cookie-only profile resolution, admin gating, removed account/planner routes | 7 |
+| `tests/access-control.test.ts` | Cookie-only profile resolution, removed account/planner/admin routes | 6 |
 
 ## 2. Audit-and-fix cycle 1 — content & data
 

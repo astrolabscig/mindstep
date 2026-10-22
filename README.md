@@ -35,7 +35,6 @@ No cloud services, API keys, or paid APIs are required for the core demo.
 | Privacy | `/privacy` | Local data, browser session, deletion |
 | Accessibility | `/accessibility` | Reduced motion, keyboard, contrast, audio alternatives |
 | Research and sources | `/research` | Claim to source register |
-| Admin | `/admin` | Key-gated moderation and directory re-verification |
 
 The earlier course, lesson, quiz, progress, and learning components still exist in the codebase and on their routes, but they are legacy and are not linked from the primary navigation or footer. The card experience is the intended demo.
 
@@ -53,7 +52,6 @@ npm run build       # production build
 Copy `.env.example` to `.env.local` if you want to override defaults.
 
 - `MINDSTEP_DATA_DIR` sets the local data directory. Default: `./data`.
-- `ADMIN_KEY` enables the key-gated admin area. Admin actions are rejected server side without it.
 
 ## Documentation
 
