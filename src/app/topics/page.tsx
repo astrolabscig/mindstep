@@ -48,6 +48,19 @@ export default function TopicsPage() {
         </div>
       </header>
 
+      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl bg-white/80 px-4 py-3 text-sm text-mist ring-1 ring-hairline">
+        <span className="font-semibold text-forest">New here?</span>
+        <span>Start with</span>
+        <a href="#why-we-react" className="font-medium text-teal-700 underline decoration-teal-300 underline-offset-2 hover:text-forest">
+          why we react
+        </a>
+        <span>or</span>
+        <a href="#mental-health-issues" className="font-medium text-teal-700 underline decoration-teal-300 underline-offset-2 hover:text-forest">
+          common mental health issues
+        </a>
+        <span>.</span>
+      </div>
+
       <TopicsExplorer />
     </div>
   );

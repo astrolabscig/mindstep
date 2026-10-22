@@ -164,9 +164,13 @@ After an internal design review found the original lesson pages too dense (long 
 ### §11.1 The topics model (added 19 October 2026)
 
 A full content-lead pass then replaced the course framing in the primary experience:
-`/topics` presents **12 self-contained cards across 7 themes** (overwhelm, low mood,
-worry, sleep, talking & helping, myths, getting help) — free exploration, no sequence,
-no quizzes or progress mechanics in the flow. Cards reuse the same delivery patterns
+`/topics` presents **24 self-contained cards across 9 themes** (overwhelm, low mood,
+worry, sleep, why we react, mental health issues, talking & helping, myths, getting help)
+— free exploration, no sequence, no quizzes or progress mechanics in the flow. The
+condition-overview theme was added on 21 October 2026 to close a literacy gap: it
+explains mechanisms behind behaviour and gives plain-language overviews of depression,
+anxiety, trauma/PTSD, bipolar disorder, OCD, psychosis, substance use and eating
+disorders. These are educational, source-backed and explicitly not diagnostic. Cards reuse the same delivery patterns
 (§11 items 1–5): one point per card, progressive disclosure via native `<details>`,
 bundled Piper audio generated per card by `scripts/generate-voice-cards.ts`
 (scripts mirrored to `docs/voice/*.txt`), and one uniform green illustration family.

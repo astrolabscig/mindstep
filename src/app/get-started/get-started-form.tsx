@@ -10,18 +10,20 @@ import { Checkbox } from "@/components/ui/fields";
 import { cn } from "@/lib/utils";
 
 const GOALS = [
-  { id: "self-understanding", label: "Understand my own mind", hint: "Worry, low mood, sleep" },
+  { id: "self-understanding", label: "Understand my own mind", hint: "Worry, low mood, sleep, why we react" },
   { id: "support-others", label: "Support other people well", hint: "Talking and helping" },
   { id: "find-services", label: "Find real services", hint: "Support directory" },
   { id: "school-work", label: "Handle school or work pressure", hint: "Overwhelm and deadlines" },
-  { id: "explore", label: "Explore it all", hint: "All twelve cards" },
+  { id: "explore", label: "Explore it all", hint: "All cards" },
 ];
 
 const TOPICS = [
   { id: "fundamentals", label: "Mental health basics" },
   { id: "stress", label: "Stress and coping" },
+  { id: "why-we-react", label: "Why we react" },
   { id: "anxiety", label: "Anxiety" },
   { id: "depression", label: "Low mood and depression" },
+  { id: "conditions", label: "Common mental health issues" },
   { id: "stigma", label: "Myths and stigma" },
   { id: "communication", label: "Talking and helping" },
   { id: "services", label: "Support in Ghana" },

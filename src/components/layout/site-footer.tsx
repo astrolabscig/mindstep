@@ -5,6 +5,8 @@ const groups = [
     heading: "Explore",
     links: [
       { href: "/topics", label: "Topics" },
+      { href: "/topics#why-we-react", label: "Why we react" },
+      { href: "/topics#mental-health-issues", label: "Mental health issues" },
       { href: "/scenarios", label: "Practice conversations" },
       { href: "/planner", label: "Action planner" },
     ],

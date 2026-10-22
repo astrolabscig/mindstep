@@ -46,6 +46,51 @@ const claims: { id: string; claim: string; where: string }[] = [
     claim: "WHO standards for adolescent care inform the app's tone and its guidance on privacy and support without judgement.",
     where: "Practice conversations · planner",
   },
+  {
+    id: "R13",
+    claim: "Mental disorders are common health conditions that can be treated, and many people do not receive care. The condition overviews describe patterns, not a checklist or a diagnosis.",
+    where: "Mental health issues theme · eating disorders card",
+  },
+  {
+    id: "R14",
+    claim: "Depression is more than ordinary sadness: it can involve persistent low mood or loss of interest, with changes in sleep, appetite, energy and concentration. It is treatable.",
+    where: "Depression card · why low mood can look like withdrawal",
+  },
+  {
+    id: "R15",
+    claim: "Anxiety disorders involve excessive fear or worry that persists and interferes with daily life; panic and avoidance are common. Avoidance maintains fear, and treatment helps.",
+    where: "Anxiety card · why we avoid",
+  },
+  {
+    id: "R16",
+    claim: "After trauma, flashbacks, nightmares, numbness, hypervigilance and avoidance are common responses, not weakness. Trauma-informed support can help without forcing someone to retell everything.",
+    where: "Trauma and PTSD card",
+  },
+  {
+    id: "R17",
+    claim: "Bipolar disorder involves episodes of low mood and unusually high energy, irritability or reduced need for sleep. It is not the same as ordinary mood swings.",
+    where: "Bipolar disorder card",
+  },
+  {
+    id: "R18",
+    claim: "OCD involves unwanted intrusive thoughts and rituals or checking that aim to reduce distress. It is not simply a preference for order; CBT with exposure and response prevention helps.",
+    where: "OCD card",
+  },
+  {
+    id: "R19",
+    claim: "Psychosis can involve hallucinations, unusual beliefs, confusion or withdrawal. It is treatable, early help matters, and a person is not defined by dangerousness.",
+    where: "Psychosis card",
+  },
+  {
+    id: "R20",
+    claim: "Harmful substance use and dependence are health issues, not moral failure. Some withdrawals can be dangerous, so stopping alcohol or sedatives suddenly without medical advice is risky.",
+    where: "Substance use card · why we cope in costly ways",
+  },
+  {
+    id: "R21",
+    claim: "Stress can trigger fight, flight, freeze or fawn responses. These are survival responses, not character flaws; naming them and slowing the body can help.",
+    where: "Why we react theme · why we snap or shut down",
+  },
 ];
 
 export default function ResearchPage() {
@@ -55,8 +100,9 @@ export default function ResearchPage() {
         <div className="min-w-0 flex-1">
           <h1 className="text-3xl font-semibold tracking-tight text-forest">Research and references</h1>
           <p className="prose-readable max-w-2xl text-[15px] text-mist">
-            Every health claim in MINDSTEP links to a published source. We checked them on{" "}
-            {ACCESSED_ON}. This page lists them.
+            Every health claim in MINDSTEP links to a published source. The original register was
+            checked on {ACCESSED_ON}; condition and mechanism sources were added and checked on 21
+            Oct 2026. This page lists them.
           </p>
         </div>
         <Art name="research-notes" priority className="w-full max-w-[160px] shrink-0" />

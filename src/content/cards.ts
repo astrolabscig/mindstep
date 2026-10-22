@@ -28,13 +28,27 @@ export type CardId =
   | "helping-a-friend"
   | "words-dont-come"
   | "myths-that-hurt"
-  | "where-to-start";
+  | "where-to-start"
+  | "why-we-snap"
+  | "why-we-avoid"
+  | "why-we-withdraw"
+  | "why-we-cope"
+  | "depression"
+  | "anxiety-disorders"
+  | "trauma-ptsd"
+  | "bipolar"
+  | "ocd"
+  | "psychosis"
+  | "substance-use"
+  | "eating-disorders";
 
 export type ThemeId =
   | "feeling-overwhelmed"
   | "low-mood"
   | "worry"
   | "sleep"
+  | "why-we-react"
+  | "mental-health-issues"
   | "talking-helping"
   | "myths"
   | "getting-help";
@@ -65,6 +79,8 @@ export const themes: Array<{ id: ThemeId; title: string; line: string; art: ArtN
   { id: "low-mood", title: "Low mood", line: "Flat, heavy days. Small things that can help.", art: "low-mood" },
   { id: "worry", title: "Worry & anxiety", line: "When thoughts loop and the body braces.", art: "worry-ideas" },
   { id: "sleep", title: "Sleep", line: "Quiet nights start before bedtime.", art: "sleep-night" },
+  { id: "why-we-react", title: "Why we react", line: "Fight, flight, freeze, avoid: what stress does, and why it is not weakness.", art: "overwhelmed" },
+  { id: "mental-health-issues", title: "Mental health issues", line: "Plain explanations of common conditions, without labels or diagnosis.", art: "learning" },
   { id: "talking-helping", title: "Talking & helping", line: "What to say to someone, or about yourself.", art: "friends-talking" },
   { id: "myths", title: "Myths & facts", line: "Kind, correct answers to the things people say.", art: "community" },
   { id: "getting-help", title: "Getting help", line: "Who to call, where to walk in, what to expect.", art: "chat-bubbles" },
@@ -282,6 +298,217 @@ export const cards: TopicCard[] = [
     art: "chat-bubbles",
     motion: "loop",
     source: "Mental Health Authority of Ghana (free line). Emergency 112.",
+  },
+  {
+    id: "why-we-snap",
+    theme: "why-we-react",
+    title: "Why we snap or shut down",
+    point: "When the brain senses threat, the body can fight, flee, freeze, or fawn. Snapping, running, going blank, or people-pleasing may all be the same alarm, not a character flaw.",
+    why: "Naming the response makes it less mysterious and gives you a moment to choose what happens next.",
+    steps: [
+      "Notice the body signal: hot face, tight chest, raised voice, or going numb.",
+      "Name it silently: \"My alarm is on. This is a threat response.\"",
+      "Buy time: slow your exhale, put both feet on the floor, and delay the next sentence.",
+      "Afterwards, repair: \"I reacted strongly. I'm sorry. Can we try that again?\"",
+    ],
+    ifYou: "If you go from calm to snapping, or blank and silent, faster than you can explain.",
+    voiceScript: "When your brain senses a threat... your body picks a survival move. Fight... flight... freeze... or fawn. That can look like snapping... running... going blank... or agreeing to everything. It is not a character flaw. It is an alarm. So notice the signal. Hot face... tight chest... raised voice... or going numb. Name it silently: my alarm is on. Then buy time. Slow your exhale. Put both feet on the floor. Delay the next sentence. And afterwards, repair. I reacted strongly. I am sorry. Can we try that again? That is how the alarm loses its grip.",
+    art: "overwhelmed",
+    source: "Standard stress-response education, with WHO stress guidance (R21). Educational, not a diagnosis.",
+  },
+  {
+    id: "why-we-avoid",
+    theme: "why-we-react",
+    title: "Why we avoid things that scare us",
+    point: "Avoiding a feared thing brings relief fast, so the brain learns that avoidance worked. The relief is real, but it teaches the fear to grow.",
+    why: "The way out is usually a small, repeated step toward the fear, not waiting to feel completely ready.",
+    steps: [
+      "Write down the thing you're avoiding and what you fear will happen.",
+      "Make one step so small it feels almost silly: open the email, walk past the room.",
+      "Stay with the discomfort for 60 seconds instead of escaping it.",
+      "Repeat, and let the fear learn from experience.",
+    ],
+    ifYou: "If you keep postponing the call, the assignment, or the conversation, and the dread grows each day.",
+    voiceScript: "Avoiding something scary works... for a moment. The relief is real. But your brain learns: that worked. So the fear grows. Maybe you postpone the call... the assignment... the conversation. Each time, the dread gets heavier. The way out is not waiting to feel ready. It is a small step toward the fear. Write down what you are avoiding. Make the first step almost silly. Open the email. Walk past the room. Then stay with the discomfort for sixty seconds. Repeat. The fear learns from experience, not from a pep talk.",
+    art: "worry-ideas",
+    source: "WHO anxiety guidance (R15). Educational, not a diagnosis.",
+  },
+  {
+    id: "why-we-withdraw",
+    theme: "why-we-react",
+    title: "Why low mood looks like distance or anger",
+    point: "Low mood drains energy and interest. Cancelling, sleeping more, or sounding irritable can look like rudeness, but it is often exhaustion and shame.",
+    why: "Seeing the symptom behind the behaviour makes it easier to respond with support instead of blame.",
+    steps: [
+      "Check the basics: sleep, food, water, daylight.",
+      "Send one low-pressure message: \"I'm not okay today. No need to fix it.\"",
+      "Offer specific company rather than asking them to organise it.",
+      "If low mood or withdrawal lasts two weeks or more, encourage a health centre visit.",
+    ],
+    ifYou: "If someone you care about has gone quiet, or you have, and nobody knows what to say.",
+    voiceScript: "Low mood does not always look like crying. Sometimes it looks like cancelling plans... sleeping more... or snapping at the people closest to you. That can seem like rudeness. Often it is exhaustion and shame. If this is you, check the basics. Sleep. Food. Water. Daylight. Send one low-pressure message: I am not okay today. No need to fix it. If it is someone you care about, offer specific company. Walk with me at five? Do not ask them to organise it. And if the low mood or withdrawal lasts two weeks or more, encourage a health centre visit.",
+    art: "low-mood",
+    motion: "young-person",
+    source: "WHO depression guidance (R14). Educational, not a diagnosis.",
+  },
+  {
+    id: "why-we-cope",
+    theme: "why-we-react",
+    title: "Why we cope in ways that cost us",
+    point: "Alcohol, overwork, scrolling, gambling, or isolation can be attempts to escape pain. They may help for an hour, then add a new problem.",
+    why: "The behaviour makes sense as coping, even when it stops helping. Shame keeps it hidden; curiosity makes it changeable.",
+    steps: [
+      "Name what the behaviour helps you avoid: loneliness, failure, memories, boredom.",
+      "Choose one lower-cost swap for tonight: a walk, a call, a shower, a meal.",
+      "Tell one person the honest version, without defending it.",
+      "If you need more to feel okay, or stopping feels dangerous, get professional help.",
+    ],
+    ifYou: "If you notice you're doing more of something lately, and it leaves you emptier.",
+    voiceScript: "Alcohol... overwork... scrolling... gambling... isolation. They can all be ways to escape pain. And they work for an hour. Then they add a new problem. That does not make you weak. It makes you human. So get curious, not ashamed. Name what the behaviour helps you avoid. Loneliness? Failure? Memories? Boredom? Then choose one lower-cost swap for tonight. A walk. A call. A shower. A meal. Tell one person the honest version. And if you need more to feel okay, or stopping feels dangerous, get professional help. Coping can change.",
+    art: "loop",
+    motion: "loop",
+    source: "WHO substance use guidance (R20); general coping guidance.",
+  },
+  {
+    id: "depression",
+    theme: "mental-health-issues",
+    title: "Depression: more than a bad day",
+    point: "Depression can bring weeks of low mood or loss of interest, along with changes in sleep, appetite, energy, focus, or movement. It is a health condition, not laziness.",
+    why: "It is treatable. Naming what is happening can make it easier to ask for help early.",
+    steps: [
+      "Note how long it has lasted and how it affects work, study, or relationships.",
+      "Tell one trusted person and book a health centre or counselling visit.",
+      "Keep one small routine: food, water, sleep, daylight.",
+      "If you have thoughts of harming yourself, call 0800 678 678 or 112 now.",
+    ],
+    ifYou: "If the heaviness has lasted most days for two weeks or more, and it is changing how you live.",
+    voiceScript: "Depression is more than sadness. It can bring weeks of low mood... loss of interest... changes in sleep... appetite... energy... focus... or movement. It is a health condition. Not laziness. Not a character flaw. And it is treatable. So note how long it has lasted. Notice how it affects work... study... relationships. Tell one trusted person. Book a health centre or counselling visit. Keep one small routine: food... water... sleep... daylight. And if you have thoughts of harming yourself, call the Mental Health Authority on oh-eight-hundred, six seven eight, six seven eight. Or one-one-two. Today counts.",
+    art: "low-mood",
+    motion: "breath-lows",
+    source: "WHO depression fact sheet (R14), checked 21 Oct 2026. Educational, not a diagnosis.",
+  },
+  {
+    id: "anxiety-disorders",
+    theme: "mental-health-issues",
+    title: "Anxiety: when the alarm stays on",
+    point: "Anxiety becomes a health issue when worry, fear, or avoidance is intense, lasts, and gets in the way of daily life. Panic can feel physical and frightening; new or worrying physical symptoms should be checked.",
+    why: "Anxiety is treatable, and avoiding everything feeds it. Small steps and support help.",
+    steps: [
+      "Write down what you avoid because of fear.",
+      "Practise one small exposure with a safe person.",
+      "Use slow exhales; reduce caffeine and sleep debt.",
+      "If panic keeps returning or you stop normal activities, seek professional help.",
+    ],
+    ifYou: "If worry or panic is shrinking your world, and you are arranging life around it.",
+    voiceScript: "Anxiety becomes a health issue when the alarm will not switch off. When worry... fear... or avoidance is intense... lasts... and gets in the way of daily life. Panic can feel physical. Racing heart... tight chest... dizziness. It is frightening. It is not usually dangerous. Still, if physical symptoms are new or worrying, get checked. And anxiety is treatable. Write down what you avoid because of fear. Practise one small exposure with a safe person. Use slow exhales. Reduce caffeine and sleep debt. And if panic keeps returning, or you stop normal activities, seek professional help. Small steps and support help.",
+    art: "worry-ideas",
+    motion: "breathe",
+    source: "WHO anxiety disorders fact sheet (R15), checked 21 Oct 2026. Educational, not a diagnosis.",
+  },
+  {
+    id: "trauma-ptsd",
+    theme: "mental-health-issues",
+    title: "Trauma: when the past stays present",
+    point: "After a frightening or violent event, the body can stay on guard. Flashbacks, nightmares, numbness, or avoiding reminders are common. This is not weakness.",
+    why: "Trauma can heal with safety and support; you do not have to retell everything to deserve help.",
+    steps: [
+      "Focus on present safety and one grounding routine.",
+      "Tell a trusted person what helps and what does not.",
+      "Ask for trauma-informed care; you can say no to details you do not want to share.",
+      "If symptoms persist or you feel unsafe, contact a professional or the helpline.",
+    ],
+    ifYou: "If the danger is over, but your body still reacts as if it is happening now.",
+    voiceScript: "After a frightening or violent event... the body can stay on guard. Flashbacks. Nightmares. Numbness. Avoiding reminders. Feeling jumpy or detached. These are common trauma responses. Not weakness. Not madness. Trauma can heal with safety and support. Focus on present safety. Keep one grounding routine. Tell a trusted person what helps and what does not. Ask for trauma-informed care. You can say no to details you do not want to share. And if symptoms persist, or you feel unsafe, contact a professional or the helpline. You do not have to retell everything to deserve help.",
+    art: "safety-net",
+    source: "WHO post-traumatic stress disorder fact sheet (R16), checked 21 Oct 2026. Educational, not a diagnosis.",
+  },
+  {
+    id: "bipolar",
+    theme: "mental-health-issues",
+    title: "Bipolar disorder: highs and lows",
+    point: "Bipolar disorder involves episodes of low mood and periods of unusually high energy, irritability, or reduced need for sleep. It is not the same as ordinary mood swings.",
+    why: "Professional assessment matters because treatment is different from ordinary low mood.",
+    steps: [
+      "Track mood, sleep, and energy for a few weeks.",
+      "Avoid stopping or starting medicines without a clinician.",
+      "Plan early warning signs with someone you trust.",
+      "If someone is unsafe or not sleeping for days, seek urgent help.",
+    ],
+    ifYou: "If mood shifts are extreme, last days or longer, and sleep changes with them.",
+    voiceScript: "Bipolar disorder is not ordinary mood swings. It involves episodes of low mood... and periods of unusually high energy... irritability... or a much smaller need for sleep. The shifts can last days or longer. They can affect judgement... money... relationships... safety. Professional assessment matters, because treatment is different from ordinary low mood. Track mood... sleep... and energy for a few weeks. Do not stop or start medicines without a clinician. Plan early warning signs with someone you trust. And if someone is unsafe, or not sleeping for days, seek urgent help.",
+    art: "progress-path",
+    source: "WHO bipolar disorder fact sheet (R17), checked 21 Oct 2026. Educational, not a diagnosis.",
+  },
+  {
+    id: "ocd",
+    theme: "mental-health-issues",
+    title: "OCD: when thoughts get stuck",
+    point: "OCD involves unwanted intrusive thoughts and rituals or checking that try to reduce the fear. It is not just liking things tidy.",
+    why: "The cycle is treatable, and shame keeps people silent. The right therapy helps.",
+    steps: [
+      "Name the loop: thought → fear → ritual → brief relief.",
+      "Delay one ritual by two minutes; notice the fear peak and fall.",
+      "Ask for CBT with exposure and response prevention.",
+      "Do not force a person to stop all rituals at once; get support.",
+    ],
+    ifYou: "If a thought keeps returning and a ritual gives only brief relief, then the cycle starts again.",
+    voiceScript: "OCD is not just liking things tidy. It involves unwanted intrusive thoughts... and rituals or checking that try to reduce the fear. Maybe a thought keeps returning. Maybe you wash... count... check... or ask for reassurance. The ritual gives brief relief. Then the cycle starts again. That is exhausting. And it is treatable. Name the loop: thought... fear... ritual... relief. Delay one ritual by two minutes. Notice the fear peak... and the fall. Ask for CBT with exposure and response prevention. Do not force someone to stop all rituals at once. Get support.",
+    art: "worry-ideas",
+    motion: "worry-locate",
+    source: "WHO obsessive-compulsive disorder fact sheet (R18), checked 21 Oct 2026. Educational, not a diagnosis.",
+  },
+  {
+    id: "psychosis",
+    theme: "mental-health-issues",
+    title: "Psychosis: when reality feels different",
+    point: "Psychosis can involve hearing or seeing things others do not, unusual beliefs, confusion, or withdrawal. It can be frightening, and it is treatable.",
+    why: "Early help matters. A person is not \"mad\" or dangerous because of psychosis.",
+    steps: [
+      "Stay calm and reduce noise and crowds.",
+      "Do not argue about the experience; ask what would help them feel safe.",
+      "Contact a health professional or the helpline; if there is danger, call 112.",
+      "Do not leave someone alone if they are confused or at risk.",
+    ],
+    ifYou: "If someone's reality seems to have shifted, and they are frightened or acting unusually.",
+    voiceScript: "Psychosis can involve hearing or seeing things others do not... unusual beliefs... confusion... or withdrawal. It can be frightening for the person and for those around them. A person is not mad. Not dangerous because of psychosis. And it is treatable. Stay calm. Reduce noise and crowds. Do not argue about the experience. Ask what would help them feel safe. Contact a health professional or the helpline. If there is danger, call one-one-two. And do not leave someone alone if they are confused or at risk. Early help matters.",
+    art: "community",
+    source: "WHO schizophrenia fact sheet (R19), checked 21 Oct 2026. Educational, not a diagnosis.",
+  },
+  {
+    id: "substance-use",
+    theme: "mental-health-issues",
+    title: "Substance use: when coping becomes dependence",
+    point: "Substance use becomes a health issue when drinking or drug use is hard to control, causes harm, or is needed to get through the day. It is not a moral failure.",
+    why: "Treatment works, and some withdrawals can be dangerous. Getting help is safer than stopping alone.",
+    steps: [
+      "Notice the pattern: what you use, how often, what it replaces.",
+      "Do not stop alcohol or sedatives suddenly without medical advice.",
+      "Call the helpline or a health centre for options.",
+      "Tell one person who can check in without shame.",
+    ],
+    ifYou: "If you need more to feel okay, or you keep promising to cut down and cannot.",
+    voiceScript: "Substance use becomes a health issue when drinking or drug use is hard to control... causes harm... or is needed to get through the day. It is not a moral failure. It is a health issue. And treatment works. Notice the pattern. What do you use? How often? What does it replace? Do not stop alcohol or sedatives suddenly without medical advice. Some withdrawals can be dangerous. Call the helpline or a health centre for options. Tell one person who can check in without shame. Getting help is safer than stopping alone.",
+    art: "take-a-break",
+    motion: "loop",
+    source: "WHO substance use fact sheet (R20), checked 21 Oct 2026. Educational, not a diagnosis.",
+  },
+  {
+    id: "eating-disorders",
+    theme: "mental-health-issues",
+    title: "Eating disorders: when food becomes fear or shame",
+    point: "Eating disorders involve serious changes in eating, body image, and control. They can affect anyone, not just young women, and are not vanity.",
+    why: "They are treatable, and early help reduces harm. Comments about weight or appearance do not help.",
+    steps: [
+      "Tell one trusted person and a health professional.",
+      "Ask for a medical check; restriction and purging can affect the heart and electrolytes.",
+      "Avoid diet talk, scales, and body comments around the person.",
+      "If there is fainting, chest pain, or severe restriction, seek urgent care.",
+    ],
+    ifYou: "If food, weight, or control has become a daily source of fear or shame.",
+    voiceScript: "Eating disorders involve serious changes in eating... body image... and control. They are not vanity. They can affect anyone... not just young women. And they are treatable. Early help reduces harm. Tell one trusted person and a health professional. Ask for a medical check, because restriction and purging can affect the heart and electrolytes. Avoid diet talk... scales... and body comments around the person. And if there is fainting... chest pain... or severe restriction, seek urgent care. Food should not be a daily source of fear or shame.",
+    art: "you-matter",
+    motion: "young-person",
+    source: "WHO mental disorders fact sheet (R13), checked 21 Oct 2026. Educational, not a diagnosis.",
   },
 ];
 

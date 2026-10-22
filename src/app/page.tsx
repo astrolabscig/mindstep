@@ -3,7 +3,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { Card, CardBody } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Callout } from "@/components/ui/callout";
-import { themes } from "@/content/cards";
+import { cards, themes } from "@/content/cards";
 import { supportServices } from "@/content/support-services";
 import { ScenarioPreview } from "@/components/landing/scenario-preview";
 import { ExplainerPlay } from "@/components/visual/explainer";
@@ -20,7 +20,7 @@ const learningLoop = [
   {
     step: "Start with one card",
     title: "Short, plain cards",
-    body: "Twelve cards across seven themes. Read one in a minute, or listen to it.",
+    body: `${cards.length} cards across ${themes.length} themes, including why we react and common mental health issues. Read one in a minute, or listen to it.`,
   },
   {
     step: "Practise the words",
@@ -49,8 +49,9 @@ export default function LandingPage() {
                 Start where it hurts. Leave with one small step.
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-mist">
-                Twelve short cards on overwhelm, low mood, worry, sleep, and getting help. Read
-                one, hear it, or practise what you&apos;d say. Free, and open to anyone.
+                {cards.length} short cards on overwhelm, low mood, worry, sleep, why we react,
+                common mental health issues, and getting help. Read one, hear it, or practise what
+                you&apos;d say. Free, and open to anyone.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href="/topics" variant="primary" size="lg">
@@ -161,11 +162,11 @@ export default function LandingPage() {
           <SectionReveal>
             <h2 className="text-3xl font-semibold leading-[1.12] tracking-[-0.02em] text-forest sm:text-4xl">Pick a theme, or start anywhere</h2>
             <p className="prose-readable mt-3 text-[15px] text-mist">
-              Seven themes, short cards, voice on every one. No sequence, no scores.
+              {themes.length} themes, short cards, voice on every one. No sequence, no scores.
             </p>
           </SectionReveal>
           <SectionReveal className="mt-10 grid gap-4 sm:grid-cols-2">
-            {themes.slice(0, 4).map((t) => (
+            {themes.slice(0, 6).map((t) => (
               <Link key={t.id} href={`/topics#${t.id}`} className="group block focus-visible:outline-3 focus-visible:outline-quietblue-600">
                 <Card className="h-full transition hover:ring-forest-500 group-hover:ring-forest-500">
                   <CardBody className="pt-5">
@@ -178,7 +179,7 @@ export default function LandingPage() {
             ))}
           </SectionReveal>
           <div className="mt-6">
-            <ButtonLink href="/topics" variant="quiet">See all seven themes</ButtonLink>
+            <ButtonLink href="/topics" variant="quiet">See all {themes.length} themes</ButtonLink>
           </div>
         </div>
       </section>

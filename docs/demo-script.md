@@ -17,7 +17,7 @@ the loop below creates your own data live.
 
 1. **Landing (`/`) — the honesty statement.** Read the first panel: what
    MINDSTEP is and what it will not do. Crisis numbers (112 / 0800 678 678) are
-   visible immediately; the sources band lists R1–R10 with access dates.
+   visible immediately; the research page lists R1–R21 with access dates.
 2. **Get started (`/get-started`).** Complete the 4 optional questions — note
    the accessibility option and that nothing here asks about feelings.
 3. **Learn → open the first module** (`/learn` → module page). Notice the

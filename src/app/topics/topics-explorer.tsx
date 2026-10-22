@@ -21,7 +21,7 @@ import { DUR, EASE_OUT, SPRING } from "@/lib/motion";
 /**
  * One theme at a time. The theme rail and the card tabs are the navigation:
  * choosing a theme or card swaps the message in place, so the page stays
- * short instead of becoming a twelve-card scroll.
+ * short instead of becoming a long card scroll.
  */
 
 const DEFAULT_THEME: ThemeId = "feeling-overwhelmed";
@@ -44,14 +44,20 @@ export function TopicsExplorer() {
   useEffect(() => {
     // Run after paint so a deep link can update the selected theme without
     // fighting React hydration or causing a cascading render in the effect.
-    const frame = window.requestAnimationFrame(() => {
+    function applyHash() {
       const requested = window.location.hash.replace(/^#/, "");
       const match = themes.find((item) => item.id === requested);
       if (!match) return;
       setThemeId(match.id);
       setCardId(firstCard(match.id));
-    });
-    return () => window.cancelAnimationFrame(frame);
+    }
+
+    const frame = window.requestAnimationFrame(applyHash);
+    window.addEventListener("hashchange", applyHash);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", applyHash);
+    };
   }, []);
 
   function chooseTheme(nextTheme: ThemeId) {
@@ -266,6 +272,13 @@ function TopicCardView({ card, index, total }: { card: TopicCard; index: number;
         </h3>
         <p className="mt-2 text-[15px] font-medium leading-relaxed text-ink sm:text-base">{card.point}</p>
         <p className="mt-2 text-sm leading-relaxed text-mist">{card.why}</p>
+
+        {card.theme === "mental-health-issues" ? (
+          <p className="mt-3 rounded-2xl bg-[#faf3dc]/75 px-3.5 py-2.5 text-xs leading-relaxed text-[#7d621a] ring-1 ring-[#f0e2b0]">
+            <strong className="font-semibold">Educational overview, not a diagnosis.</strong>{" "}
+            Only a trained health professional can assess a condition.
+          </p>
+        ) : null}
 
         {card.motion ? (
           <div className="mt-5 border-t border-hairline pt-4">

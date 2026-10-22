@@ -1,6 +1,6 @@
 # MINDSTEP — Health References Register
 
-Every substantive health or health-system claim shipped in MINDSTEP content maps to a source below. Access date for all URLs: **2026-10-18**. In-app citations use reference IDs (`R1`–`R10`) defined in `src/content/references.ts`, which carries the same metadata as this register.
+Every substantive health or health-system claim shipped in MINDSTEP content maps to a source below. Access date for the original register: **2026-10-18**; condition and mechanism sources **R13–R21** were checked on **2026-10-21**. In-app citations use reference IDs (`R1`–`R21`) defined in `src/content/references.ts`, which carries the same metadata as this register.
 
 ## Review standard
 
@@ -76,9 +76,66 @@ A claim may be published when ALL of the following hold:
 ### R11 — WCAG 2.2 (W3C) · used for the accessibility engineering target, not a health claim.
 ### R12 — Nielsen Norman Group, 10 Usability Heuristics · used for the UX audit rubric.
 
+### R13 — WHO (2026), *Mental disorders* fact sheet, updated 11 September 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/mental-disorders
+- **Claims it supports**
+  - Mental disorders are common, vary in onset and course, and can be treated; many people do not receive care. → *Mental health issues* theme framing and the eating-disorders overview.
+  - Eating disorders involve abnormal eating behaviour and preoccupation with food, weight and shape, can affect physical health, and often co-occur with depression, anxiety and substance use. → *eating-disorders* card.
+  - Condition overviews describe patterns, not a checklist; no card states that a reader has a condition.
+
+### R14 — WHO (2026), *Depressive disorder (depression)* fact sheet, updated 11 September 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/depression
+- **Claims it supports**
+  - Depression is different from ordinary mood changes; it can involve persistent low mood or loss of interest, and changes in sleep, appetite, energy and concentration, lasting weeks and affecting daily life. → *depression* card and *why-we-withdraw*.
+  - Depression is treatable and early help matters. → *depression* card, "If low mood or withdrawal lasts two weeks or more, encourage a health centre visit".
+
+### R15 — WHO (2026), *Anxiety disorders* fact sheet, updated 15 September 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/anxiety-disorders
+- **Claims it supports**
+  - Anxiety disorders involve excessive fear or worry, can include panic and avoidance, and become a health issue when persistent and impairing. → *anxiety-disorders* card and *why-we-avoid*.
+  - Avoidance maintains fear; treatment is available. → *why-we-avoid* and *anxiety-disorders* cards.
+
+### R16 — WHO (2026), *Post-traumatic stress disorder* fact sheet, updated 11 September 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/post-traumatic-stress-disorder
+- **Claims it supports**
+  - After a traumatic event, people may experience flashbacks, nightmares, hypervigilance, numbness or avoidance; these are common responses, not weakness. → *trauma-ptsd* card.
+  - Trauma-focused support can help and people should not be pressured to retell details. → *trauma-ptsd* card ("you can say no to details you do not want to share").
+
+### R17 — WHO (2026), *Bipolar disorder* fact sheet, updated 11 September 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/bipolar-disorder
+- **Claims it supports**
+  - Bipolar disorder involves episodes of low mood and elevated energy or irritability, with changes in sleep and activity; it is distinct from ordinary mood swings. → *bipolar* card.
+  - Professional assessment and treatment matter; stopping medicines without a clinician is risky. → *bipolar* card.
+
+### R18 — WHO (2026), *Obsessive-compulsive disorder* fact sheet, checked 21 October 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/obsessive-compulsive-disorder
+- **Claims it supports**
+  - OCD involves unwanted intrusive thoughts and repetitive behaviours or rituals that aim to reduce distress; it is not simply a preference for order. → *ocd* card.
+  - CBT with exposure and response prevention is a recommended psychological treatment; support is preferable to forcing someone to stop all rituals at once. → *ocd* card.
+
+### R19 — WHO (2026), *Schizophrenia* fact sheet, updated 11 September 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/schizophrenia
+- **Claims it supports**
+  - Psychosis can include hallucinations, unusual beliefs, disorganised thinking and withdrawal; it is treatable and early help matters. → *psychosis* card.
+  - People with psychosis are not defined by dangerousness; calm, respectful support and urgent help when safety is at risk are appropriate. → *psychosis* card.
+
+### R20 — WHO (2026), *Substance abuse* fact sheet, checked 21 October 2026
+- URL: https://www.who.int/news-room/fact-sheets/detail/substance-abuse
+- **Claims it supports**
+  - Harmful substance use and dependence are health issues, not moral failure; treatment is available. → *substance-use* card and *why-we-cope*.
+  - Some withdrawals (including alcohol and sedatives) can be dangerous; people should seek medical advice rather than stop suddenly. → *substance-use* card.
+
+### R21 — WHO (2026), *Stress* Q&A, checked 21 October 2026
+- URL: https://www.who.int/news-room/questions-and-answers/item/stress
+- **Claims it supports**
+  - Stress can trigger fight, flight, freeze or fawn responses; these are survival responses, not character flaws. → *why-we-snap* card.
+  - Naming the response, slowing breathing and taking small practical steps can help people regain a sense of control. → *why-we-snap* card.
+
 ### Teaching-content claims NOT drawn from a single citation (baseline clinical consensus)
 
-Lesson content in *understanding-anxiety* and *understanding-depression* describes widely agreed, plain-language concepts ("anxiety is a normal response that becomes much harder to manage when it persists over time", "depression is a condition that affects mood, thinking and activity and is treatable"). These are consistent with WHO's fact sheets and the cited WHO reports rather than restatements of one study. Lesson text never lists symptoms as a diagnostic checklist; symptom-style examples are always framed as "everyone's experience differs — only a health professional can assess" and are followed by an explicit educational-information disclaimer. Where a specific phrasing leans on WHO's depression/anxiety fact sheets, users see the WHO institutional citation on the lesson's sources list.
+Legacy lesson content in *understanding-anxiety* and *understanding-depression* describes widely agreed, plain-language concepts ("anxiety is a normal response that becomes much harder to manage when it persists over time", "depression is a condition that affects mood, thinking and activity and is treatable"). These are consistent with WHO's fact sheets and the cited WHO reports rather than restatements of one study. Lesson text never lists symptoms as a diagnostic checklist; symptom-style examples are always framed as "everyone's experience differs — only a health professional can assess" and are followed by an explicit educational-information disclaimer. Where a specific phrasing leans on WHO's depression/anxiety fact sheets, users see the WHO institutional citation on the lesson's sources list.
+
+The newer condition cards follow the same rule: each describes a pattern in plain language, names a WHO fact sheet in its source line, and carries a visible "Educational overview, not a diagnosis" note. No card asks the reader to count symptoms or decide whether they have a condition.
 
 ## Verification ledger (Support Navigator)
 

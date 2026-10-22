@@ -2,7 +2,7 @@ import type { ThemeId } from "@/content/cards";
 import { cn } from "@/lib/utils";
 
 /**
- * Small line-art marks for the seven topics. They replace the tiny unDraw
+ * Small line-art marks for the topic rail. They replace the tiny unDraw
  * thumbnails, which read as dark blobs at card size. Decorative only: the
  * heading beside every mark carries the meaning.
  */
@@ -51,6 +51,20 @@ function Mark({ theme }: { theme: ThemeId }) {
         <g {...common}>
           <path d="M18.5 14.5A6.5 6.5 0 0 1 9.5 5.5a6.5 6.5 0 1 0 9 9Z" />
           <path d="M16.5 5.5h3l-3 3.5h3" />
+        </g>
+      );
+    case "why-we-react":
+      return (
+        <g {...common}>
+          <circle cx="12" cy="12" r="7.5" />
+          <path d="M13.2 7.5 9.8 12h2.8l-1.4 4.5 4-5h-2.9l.9-4Z" />
+        </g>
+      );
+    case "mental-health-issues":
+      return (
+        <g {...common}>
+          <path d="M9 20v-3.2c-2.1-1.3-3.3-3.5-3.3-6A6.3 6.3 0 0 1 12 4.5a6.3 6.3 0 0 1 6.3 6.3c0 2.5-1.2 4.7-3.3 6V20" />
+          <path d="M9 20h6M12 9.5v4M10 11.5h4" />
         </g>
       );
     case "talking-helping":

@@ -63,11 +63,11 @@ AA, unverified" — not as a claim of conformance.
 
 - **Primary "Listen" voice: bundled neural MP3s, generated OFFLINE before the
   demo.** `scripts/generate-voice.ts` and `scripts/generate-voice-cards.ts`
-  pipe the lesson deck + all 12 topic cards' text through
+  pipe the lesson deck + all 24 topic cards' text through
   **Piper** (rhasspy/piper) — a fully local, MIT-licensed neural TTS engine
   — producing natural human-quality audio in `public/voice`
   (~17 MB, 64 lesson files, voice `en_US-amy-medium`) and
-  `public/voice/cards` (12 files, card scripts mirrored in `docs/voice/*.txt`).
+  `public/voice/cards` (24 files, card scripts mirrored in `docs/voice/*.txt`).
   At runtime the app serves static files:
   no cloud, no API keys, no paid service at build or run time. This is a
   **stock natural voice, not a clone of a specific real person** — voice

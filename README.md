@@ -2,7 +2,7 @@
 
 **Understand your mind. Practise what you learn. Know your next step.**
 
-MINDSTEP is a free mental health literacy app for Ghana. It is built around 12 short topic cards across seven themes, with voice and text, motion explainers, practice conversations, a checked support directory, and a private action planner.
+MINDSTEP is a free mental health literacy app for Ghana. It is built around 24 short topic cards across nine themes, with voice and text, motion explainers, practice conversations, a checked support directory, and a private action planner. The library covers everyday coping, why people react the way they do, and plain-language overviews of common mental health issues.
 
 It is educational, not clinical. It does not diagnose, treat, or monitor anyone, and it is not a crisis service.
 
@@ -28,7 +28,7 @@ No cloud services, API keys, or paid APIs are required for the core demo.
 | Area | Route | Notes |
 | --- | --- | --- |
 | Landing page | `/` | Product promise, safety line, and entry points |
-| **Topic cards (primary experience)** | **`/topics`** | **12 cards across 7 themes. Theme-first explorer: choose a theme, then a card, and the message swaps in place instead of a twelve-card scroll. Free exploration, no sequence. Each card has a plain explanation, a why, 2 to 4 small steps, voice and text, and an illustration or explainer.** |
+| **Topic cards (primary experience)** | **`/topics`** | **24 cards across 9 themes, including "Why we react" and "Mental health issues". Theme-first explorer: choose a theme, then a card, and the message swaps in place instead of a long-card scroll. Free exploration, no sequence. Each card has a plain explanation, a why, 2 to 4 small steps, voice and text, and an illustration or explainer. Condition overviews carry an explicit "educational, not a diagnosis" note.** |
 | Practice conversations | `/scenarios` | Branching replies with non-judgemental feedback. Seven scenarios. |
 | Support directory | `/support` | Ghanaian services with verification status, source, and check date |
 | Action planner | `/planner` | Learner-authored next steps only |

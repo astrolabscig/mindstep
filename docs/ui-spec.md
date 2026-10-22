@@ -74,10 +74,10 @@ take the *feel*, reject the clinical metaphors.
   (decorative, aria-hidden, pointer-events-none).
 - **Rounded mint banner** on `/topics` (header sits in a soft card, matching
   the reference's "choose a doctor" band).
-- **Compact theme explorer** on `/topics`: seven theme tabs and card tabs swap
+- **Compact theme explorer** on `/topics`: nine theme tabs and card tabs swap
   one card at a time, with Motion layout pills and a short fade/slide. The page
-  no longer anchor-scrolls through all twelve cards; deep links such as
-  `/topics#low-mood` still select a theme.
+  no longer anchor-scrolls through the full card library; deep links such as
+  `/topics#low-mood` and `/topics#mental-health-issues` still select a theme.
 - Segmented header pill track re-tinted to mint.
 
 **Rejected (deliberately)**
