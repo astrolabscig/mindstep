@@ -643,7 +643,7 @@ export const lessons: Lesson[] = [
         id: "s2",
         heading: "During the contact",
         body:
-          "Ask the questions booked in your Action Planner: 'What happens next?', 'What does this cost with my NHIS card?', 'Who sees my information?', 'When should I come back?'. Writing answers down turns an overwhelming moment into a plan.",
+          "Ask the four questions you prepared: 'What happens next?', 'What does this cost with my NHIS card?', 'Who sees my information?', 'When should I come back?'. Writing answers down turns an overwhelming moment into a plan.",
         example:
           "A school counsellor planned a first-ever clinic visit with a student using this product: the student booked, prepared four questions, took his NHIS card, and brought his sister. The visit ended with an appointment card and one follow-up date, the kind of practical outcome these pages aim for.",
       },

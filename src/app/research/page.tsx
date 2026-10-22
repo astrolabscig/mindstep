@@ -44,7 +44,7 @@ const claims: { id: string; claim: string; where: string }[] = [
   {
     id: "R9/R10",
     claim: "WHO standards for adolescent care inform the app's tone and its guidance on privacy and support without judgement.",
-    where: "Practice conversations · planner",
+    where: "Practice conversations · support directory",
   },
   {
     id: "R13",
@@ -154,7 +154,7 @@ export default function ResearchPage() {
       <Callout tone="caution" title="What the evidence supports, and what it does not" className="mt-10">
         Educational programmes can reliably raise knowledge. Evidence that they change stigma or
         lead people to ask for help on their own is weak, so MINDSTEP pairs cards with practice
-        (conversations, planner) rather than promising attitude change. The full claim mapping and
+        conversations rather than promising attitude change. The full claim mapping and
         verification notes are in docs/research.md and docs/health-references.md in the repository.
       </Callout>
 

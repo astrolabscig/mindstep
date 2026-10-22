@@ -2,8 +2,8 @@
 
 Product: **MINDSTEP** — a mental health literacy and support-navigation web platform for Ghana.
 Tagline: *Understand your mind. Practise what you learn. Know your next step.*
-Prepared for the AXELLEMD programming internship assignment, "Rethinking Health Education" (submission deadline: 16 October 2026).
-Last updated: 18 October 2026.
+Built for the "Rethinking Health Education" product brief (October 2026).
+Last updated: 22 October 2026.
 
 ---
 

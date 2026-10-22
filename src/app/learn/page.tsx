@@ -204,12 +204,12 @@ export default async function LearnPage() {
           ) : (
             <Card>
               <CardBody className="pt-5">
-                <h3 className="font-semibold text-forest">You&apos;re browsing as a guest</h3>
+                <h3 className="font-semibold text-forest">Saved in this browser</h3>
                 <p className="mt-1 text-sm text-mist">
-                  Progress saves in this browser. Create an account to keep it.
+                  No account needed. Progress starts as soon as you open a card or try a check.
                 </p>
-                <ButtonLink href="/account" size="sm" variant="quiet" className="mt-3">
-                  Sign in or create an account
+                <ButtonLink href="/topics" size="sm" variant="quiet" className="mt-3">
+                  Browse topics
                 </ButtonLink>
               </CardBody>
             </Card>

@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
  *   Server actions never accept a profile id from the client, so one
  *   visitor cannot read or mutate another visitor's records by
  *   crafting requests (verified by unit tests + access rules below).
- * - Registered accounts hash passwords with scrypt (no plaintext).
+ * - There is no account system. A visitor is a guest in this browser.
  *
  * Scope: development/demo. Production hardening steps are documented in
  * docs/safety-and-privacy.md and implemented for real once Supabase
@@ -24,27 +24,8 @@ export function newProfileId(): string {
   return crypto.randomUUID();
 }
 
-export function newActionId(): string {
-  return `act_${crypto.randomBytes(6).toString("hex")}`;
-}
-
 export function newRecordId(prefix: string): string {
   return `${prefix}_${crypto.randomBytes(8).toString("hex")}`;
-}
-
-export function hashPassword(password: string, salt?: string): string {
-  const s = salt ?? crypto.randomBytes(16).toString("hex");
-  const hash = crypto.scryptSync(password, s, 32).toString("hex");
-  return `${s}:${hash}`;
-}
-
-export function verifyPassword(password: string, stored: string): boolean {
-  const [salt, hash] = stored.split(":");
-  if (!salt || !hash) return false;
-  const candidate = crypto.scryptSync(password, salt, 32).toString("hex");
-  const a = Buffer.from(candidate, "hex");
-  const b = Buffer.from(hash, "hex");
-  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
 export async function readSessionProfileId(): Promise<string | null> {
@@ -83,11 +64,6 @@ export async function setAdminCookie() {
 export async function clearAdminCookie() {
   const jar = await cookies();
   jar.delete(ADMIN_COOKIE);
-}
-
-export async function clearSessionCookie() {
-  const jar = await cookies();
-  jar.delete(SESSION_COOKIE);
 }
 
 /* ── Admin authorisation ───────────────────────────────────── */

@@ -10,13 +10,13 @@ Decision rule: *does this help a person understand or act today?* If not, delete
 | Course structure: 8 modules, "learning path", ordered sequence | `/learn`, module pages | **Delete from navigation** (new `/topics` becomes primary; legacy routes unlinked, pending removal) | Forced sequence contradicts free exploration; people arrive with a problem, not a syllabus |
 | 16 lessons | `/learn/[slug]`, `/lesson/[lessonId]` | **Merge** into the topic-card library (24 cards) | Same psychoeducational ground, ~80% less text; each card is self-contained with steps + audio |
 | Quizzes / knowledge checks (32 questions) | `/quiz/[slug]`, lesson deck | **Delete from primary experience** | Brief bans gamified testing; School-of-course feel, no action value (legacy route stays unlinked) |
-| Progress bars, streaks, completion % | `/progress`, dashboard stat strip | **Delete from navigation** | Progress mechanics are course mechanics; user owns notes/actions instead |
+| Progress bars, streaks, completion % | `/progress`, dashboard stat strip | **Delete from navigation** | Progress mechanics are course mechanics; the learner owns their own activity |
 | Recall review / "recommended next lesson" engine | dashboard | **Delete from navigation** | Recommendation = soft forced sequence |
 | Scenario Lab (say-this-not-that practice) | `/scenarios` | **Keep** (renamed "Practice" in nav) | It's practise, not a level; direct action value for the app's core job |
 | Support navigator (MHA line, services directory) | `/support` | **Keep** | Pure action: who to call, where to walk in |
 | Need-help-now crisis info | `/safety` | **Keep + surface**: always-visible header chip | Must never be buried (brief) |
-| Planner (who to tell, what to say, where to go) | `/planner` | **Keep** | It produces an artifact the person can use tomorrow |
-| Sign-in / account | `/account`, `/get-started` | Keep, de-emphasised | Data ownership, not data collection; no gate anywhere |
+| Planner (who to tell, what to say, where to go) | `/planner` | **Delete** | Removed from the product: the cards and practice conversations already carry the next-step work, and the page was not adding enough value |
+| Sign-in / account | `/account`, `/get-started` | **Delete** | The app is free and open; no account is needed. Progress stays in the browser and can be deleted from `/privacy` |
 | Myths & stigma content | lessons (duplicated across 3 modules) | **Merge** into one card (`myths-that-hurt`) | Duplicate topic in 3 places; one best version now |
 | Sleep, worry, low mood, overwhelm, body anxiety, talking, help-seeking | lesson bodies | **Merge/replace** into `src/content/cards.ts` (12 practical cards) | Per-card model: point, why, 2–4 steps, "if this is you", voice, illustration, source line |
 | Why people react, and common mental health issues | gap in the original card set | **Add** 12 cards: 4 mechanism cards and 8 condition overviews | Mental health literacy needs both "what can I do?" and "what is happening, and why?"; condition cards are educational, not diagnostic |

@@ -117,7 +117,7 @@ export default function SafetyPage() {
               <li>Call the free MHA helpline <strong className="text-forest">0800 678 678</strong> and describe what you are seeing. They can guide the next step.</li>
               <li>The <Link href="/learn/when-to-seek-help" className="underline">&ldquo;When professional help may be appropriate&rdquo;</Link> page explains common warning signs to take seriously, as education, not as a checklist that diagnoses anyone.</li>
               <li>Our <Link href="/topics#talking-helping" className="underline">talking and helping</Link> cards, and the <Link href="/scenarios" className="underline">practice conversations</Link>, give you ways to start the conversation without judgement.</li>
-              <li>Use the <Link href="/planner" className="underline">planner</Link> to prepare what to ask, who to call first, and what to say.</li>
+              <li>Write down what you want to ask, who you can call first, and what you want to say. A short note on your phone is enough.</li>
             </ul>
           </CardBody>
         </Card>

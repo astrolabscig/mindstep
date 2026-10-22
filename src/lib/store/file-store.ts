@@ -74,18 +74,16 @@ export function getProfile(db: Db, profileId: string) {
   return db.profiles[profileId];
 }
 
-export function ensureProfile(db: Db, profileId: string, kind: "guest" | "account" = "guest") {
+export function ensureProfile(db: Db, profileId: string) {
   if (!db.profiles[profileId]) {
     db.profiles[profileId] = {
       id: profileId,
-      kind,
       createdAt: new Date().toISOString(),
       onboarding: null,
       lessonProgress: {},
       savedLessonIds: [],
       quizAttempts: [],
       scenarioRuns: [],
-      actions: [],
       preferences: {},
     };
   }
@@ -95,22 +93,12 @@ export function ensureProfile(db: Db, profileId: string, kind: "guest" | "accoun
 export function deleteProfileData(db: Db, profileId: string) {
   db.profiles[profileId] = {
     id: profileId,
-    kind: "guest",
     createdAt: new Date().toISOString(),
     onboarding: null,
     lessonProgress: {},
     savedLessonIds: [],
     quizAttempts: [],
     scenarioRuns: [],
-    actions: [],
     preferences: {},
   };
-}
-
-/** Never expose password hash to the client. */
-export function sanitiseProfile(p: unknown) {
-  if (typeof p !== "object" || p === null) return p;
-  const clone = { ...(p as Record<string, unknown>) };
-  delete clone.passwordHash;
-  return clone;
 }

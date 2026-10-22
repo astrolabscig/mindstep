@@ -7,7 +7,7 @@
  *                                 # the progress page without clicking through
  *
  * The demo profile binds to the printed session id: set the `ms_sid` cookie
- * to that value (or sign up fresh on /get-started) to browse as the demo user.
+ * to that value (or start fresh on /get-started) to browse as the demo user.
  *
  * The file store honours MINDSTEP_DATA_DIR if set; defaults to ./data.
  */
@@ -48,7 +48,6 @@ if (wantDemo) {
   const daysAgo = (n: number) => new Date(now.getTime() - n * 86_400_000).toISOString();
   db.profiles[id] = {
     id,
-    kind: "guest",
     createdAt: daysAgo(12),
     onboarding: { goal: "support-others", topics: ["stigma", "communication"], pace: "steady", completedAt: daysAgo(12) },
     lessonProgress: {
@@ -63,10 +62,6 @@ if (wantDemo) {
     ],
     scenarioRuns: [
       { id: `run_${crypto.randomBytes(8).toString("hex")}`, scenarioId: "worried-friend", finishedAt: daysAgo(6), worstChoiceQuality: "acceptable" },
-    ],
-    actions: [
-      { id: `act_${crypto.randomBytes(6).toString("hex")}`, kind: "identify-trusted-person", title: "Ask Efua if she can come with me to the clinic", detail: "She went with her brother last year.", done: true, createdAt: daysAgo(5), doneAt: daysAgo(4) },
-      { id: `act_${crypto.randomBytes(6).toString("hex")}`, kind: "prepare-questions", title: "Write three questions to ask at the OPD", detail: "", done: false, createdAt: daysAgo(4), doneAt: null },
     ],
     preferences: {},
   };

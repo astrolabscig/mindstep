@@ -6,7 +6,6 @@ import {
   scenariosPractised,
   scenariosTotal,
   reviewQueueLessonIds,
-  goalsCompleted,
   metricExplanations,
   type ProgressProfile,
 } from "@/lib/domain/progress";
@@ -17,12 +16,11 @@ const blank: ProgressProfile = {
   lessonProgress: {},
   quizAttempts: [],
   scenarioRuns: [],
-  actions: [],
 };
 
 describe("progress metrics", () => {
   it("explanations exist for every displayed metric and are written in plain language", () => {
-    for (const key of ["lessonsCompleted", "quizPerformance", "scenariosPractised", "reviewQueue", "goalsCompleted"]) {
+    for (const key of ["lessonsCompleted", "quizPerformance", "scenariosPractised", "reviewQueue"]) {
       const text = metricExplanations[key];
       expect(text, `explanation for ${key}`).toBeTruthy();
       expect(text.length).toBeGreaterThan(30);
@@ -36,7 +34,6 @@ describe("progress metrics", () => {
     expect(lessonsTotal()).toBeGreaterThan(0);
     expect(scenariosPractised(blank)).toBe(0);
     expect(scenariosTotal()).toBeGreaterThan(0);
-    expect(goalsCompleted(blank)).toBe(0);
     expect(topicScores(blank)).toEqual([]);
   });
 
@@ -55,11 +52,9 @@ describe("progress metrics", () => {
         { scenarioId: "s1", finishedAt: "2026-10-02T00:00:00Z" },
         { scenarioId: "s2", finishedAt: "2026-10-03T00:00:00Z" },
       ],
-      actions: [{ done: true }, { done: false }, { done: true }],
     };
     expect(lessonsCompleted(p)).toBe(2);
     expect(scenariosPractised(p)).toBe(2); // s1 counted once
-    expect(goalsCompleted(p)).toBe(2);
   });
 
   it("reports the latest score per module with an attempt count", () => {
@@ -99,7 +94,6 @@ describe("progress metrics", () => {
         { moduleId: healthyModule.id, percentage: 100, attemptedAt: "2026-10-03T00:00:00Z" },
       ],
       scenarioRuns: [],
-      actions: [],
     };
     const queue = reviewQueueLessonIds(p, {
       [weakModule.id]: ["q1"],

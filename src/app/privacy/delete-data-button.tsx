@@ -28,8 +28,7 @@ export function DeleteDataButton() {
       </Button>
       <Modal open={open} onClose={() => setOpen(false)} title="Delete all data for this session?">
         <p className="text-sm text-mist">
-          This erases your lesson progress, scores, scenario runs, planner notes and action items.
-          It cannot be undone.
+          This erases your lesson progress, scores, and scenario runs. It cannot be undone.
         </p>
         <div className="mt-4 flex gap-2">
           <Button

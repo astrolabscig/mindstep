@@ -12,33 +12,32 @@
    attitude change, let alone clinical benefit.
 3. **Crisis handoff is explicit and repeated.** National emergency **112** and
    the MHA toll-free line **0800 678 678** are surfaced on the landing page, the
-   safety page, the support directory, the scenario feedback and the planner.
+   safety page, the support directory, and the scenario feedback.
    Launch of the 0800 678 678 line and its purpose are cited (R5, R6).
 4. **Feedback is never shaming.** Every scenario choice renders strengths +
    limitations + consequence, whatever its quality. Schema enforces minimum
    lengths for all three fields.
-5. **Data minimisation.** The only "sensitive-adjacent" data a learner can
-   enter is their own planner note text. There are no free-text "how do you
-   feel" fields anywhere; no third-party analytics or trackers.
+5. **Data minimisation.** The app stores learning activity only. There are no
+   free-text "how do you feel" fields, no planner notes, and no third-party
+   analytics or trackers.
 
 ## Privacy design (local mode)
 
 | What | Where | Controls |
 | --- | --- | --- |
-| Session id | httpOnly cookie `ms_sid`, 90 days, same-site lax | Sign out clears it; delete-my-data resets the record |
+| Session id | httpOnly cookie `ms_sid`, 90 days, same-site lax | Delete-my-data resets the record |
 | Learning activity | `data/mindstep-db.json`, server-side only | Not addressable by crafted client requests (cookie-only resolution, statically tested) |
-| Account email/name + scrypt hash | same file, only on registration | Account page: sign out + delete-my-data |
-| Planner notes | same file, as written by the user | Delete-my-data erases them |
 
-- Password hashing: scrypt (random 16-byte salt), constant-time comparison.
+- There is no account system, so the app never stores a name, email address, or
+  password hash.
 - The admin key never grants access to learner content; it only gates content
   moderation (lesson publish state, service verification), all logged in
   `revisions[]`.
 
 ## Deletion
 
-`deleteMyData()` (exposed on `/privacy` and `/account`) resets the profile
-bound to the current session to a fresh, empty guest record. In a file-backed
+`deleteMyData()` (exposed on `/privacy`) resets the profile bound to the
+current session to a fresh, empty record. In a file-backed
 local mode this is immediate and complete for this session. A "hard delete of
 past backups" does not apply — there are no backups and no cloud copies; if a
 production backend existed, this function would be the deletion entry point in

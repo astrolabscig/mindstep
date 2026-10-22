@@ -11,7 +11,6 @@ export type ProgressProfile = {
   lessonProgress: Record<string, { completed?: boolean }>;
   quizAttempts: { moduleId: string; percentage: number; attemptedAt: string }[];
   scenarioRuns: { scenarioId: string; finishedAt: string }[];
-  actions: { done: boolean }[];
 };
 
 export const metricExplanations: Record<string, string> = {
@@ -23,7 +22,6 @@ export const metricExplanations: Record<string, string> = {
     "Counted as branching scenarios you carried to their concluding summary at least once.",
   reviewQueue:
     "Lessons tied to questions you answered incorrectly or modules whose latest check scored below 70%.",
-  goalsCompleted: "Action plan items you marked done yourself.",
 };
 
 export function lessonsCompleted(p: { lessonProgress: ProgressProfile["lessonProgress"] }): number {
@@ -95,8 +93,4 @@ export function reviewQueueLessonIds(
     }
   }
   return lessons.filter((l) => ids.has(l.id)).map((l) => l.id);
-}
-
-export function goalsCompleted(p: { actions: { done: boolean }[] }): number {
-  return p.actions.filter((a) => a.done).length;
 }

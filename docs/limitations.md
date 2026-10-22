@@ -1,7 +1,7 @@
 # Limitations (read before trusting anything to this build)
 
-This is an internship assignment deliverable: an honest educational demo built
-to the brief, not a certified clinical, privacy, or accessibility product.
+This is an honest educational demo built to a defined product brief, not a
+certified clinical, privacy, or accessibility product.
 
 ## Domain boundaries
 
@@ -15,9 +15,9 @@ to the brief, not a certified clinical, privacy, or accessibility product.
   analysis, alerting, or human review. If someone uses MINDSTEP during a real
   crisis, the platform will not notice. The product says this on `/safety`
   because it is true, not as a disclaimer formality.
-- **Not therapy-adjacent by inference.** The planner stores user-authored
-  actions only; nothing suggests self-treatment, medication changes, or
-  diagnosis-seeking shortcuts.
+- **Not therapy-adjacent by inference.** The app stores learning activity only;
+  there is no planner, mood journal, or free-text note field, and nothing
+  suggests self-treatment, medication changes, or diagnosis-seeking shortcuts.
 
 ## Evidence honesty
 
@@ -37,15 +37,15 @@ to the brief, not a certified clinical, privacy, or accessibility product.
   browsers write concurrently only through the last-wins rename.
 - **Supabase path is documentation, not a feature.** Setting the env vars is
   not sufficient; the adapter, schema, and verified deployment are future
-  work (docs/architecture.md). No part of this submission claims cloud
+  work (docs/architecture.md). No part of this build claims cloud
   persistence.
 - **Sessions are cookie-based and admin key is a shared secret** — fine for a
   classroom demo; not fine for production (no per-moderator identity, 2FA,
   session revocation, or rate limiting on auth endpoints in this build).
 - `npm audit` has 5 high-severity findings in the dev-only ESLint chain
   (documented in docs/qa-report.md — deliberately not force-fixed).
-- No e2e/browser tests; unit coverage is 41 tests over content integrity,
-  domain logic, graphs and access control.
+- No e2e/browser tests; unit coverage is over content integrity, domain logic,
+  graphs and access control.
 - Some shell/PowerShell environment quirks affected earlier dev iterations
   (documented in docs/qa-report.md), not the product itself.
 
@@ -84,8 +84,8 @@ AA, unverified" — not as a claim of conformance.
 - **Illustrations: the unDraw professional vector set** (`public/art/*.svg`,
   open licence, no attribution required; not MIT), recoloured to the MINDSTEP
   teal/forest/mint palette. The set covers the landing page, get-started,
-  topics, dashboard, module/lesson, practice, support, progress, planner, safety,
-  and research (see `docs/illustration-map.md`).
+  topics, dashboard, module/lesson, practice, support, progress, safety, and
+  research (see `docs/illustration-map.md`).
   Every visible editorial illustration is from this set; the custom CSS scene
   shapes, botanical haze, line-art topic marks, completion confetti, and unused
   Next.js template SVGs were removed on 22 October 2026.

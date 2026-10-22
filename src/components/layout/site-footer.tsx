@@ -8,7 +8,6 @@ const groups = [
       { href: "/topics#why-we-react", label: "Why we react" },
       { href: "/topics#mental-health-issues", label: "Mental health issues" },
       { href: "/scenarios", label: "Practice conversations" },
-      { href: "/planner", label: "Action planner" },
     ],
   },
   {
@@ -62,7 +61,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-forest-700">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4 text-xs text-canvas/60 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>© 2026 MINDSTEP. AXELLEMD programming internship assignment.</p>
+          <p>© 2026 MINDSTEP. Free and open to anyone.</p>
         </div>
       </div>
     </footer>

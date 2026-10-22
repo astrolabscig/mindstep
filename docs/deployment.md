@@ -1,6 +1,6 @@
 # Deployment
 
-## Environment used for this submission
+## Environment used for this build
 
 Local development/production build on Windows:
 
@@ -20,12 +20,12 @@ shows why it is disabled and all admin actions are rejected server-side.
 
 - **Done and verified:** production build (`npm run build`) compiles clean and
   `npm start` serves it; data persists to `data/mindstep-db.json`.
-- **Not done, and not claimed:** any cloud hosting deployment. The project is
-  not a git repo in this workspace (by assignment design it is a local
-  deliverable), no Vercel/GitHub deploy was performed, and the Supabase
-  adapter is documented (see `docs/architecture.md`) but intentionally
-  inactive: `SUPABASE_URL`/`SUPABASE_ANON_KEY` are absent, so
-  `persistenceMode()` returns `"local"` and no copy claims otherwise.
+- **Not done, and not claimed:** any cloud hosting deployment. The source can
+  be pushed to GitHub, but no hosted app, Vercel deploy, or production backend
+  was performed. The Supabase adapter is documented (see
+  `docs/architecture.md`) but intentionally inactive: `SUPABASE_URL` /
+  `SUPABASE_ANON_KEY` are absent, so `persistenceMode()` returns `"local"` and
+  no copy claims otherwise.
 
 ## Deploying on typical environments (if desired later)
 

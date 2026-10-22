@@ -50,28 +50,16 @@ describe("profile access rules (static audits)", () => {
     expect(src).toContain('sameSite: "lax"');
   });
 
-  it("passwords are hashed with scrypt and compared in constant time", () => {
-    const src = readRepo("src/lib/session.ts");
-    expect(src).toContain("scryptSync");
-    expect(src).toContain("timingSafeEqual");
-  });
-
-  it("password hashes are stripped before any client exposure", () => {
-    const store = readRepo("src/lib/store/file-store.ts");
-    expect(store).toContain("sanitiseProfile");
-    // the clone drops the hash field before returning anything client-bound
-    expect(store).toMatch(/delete clone\.passwordHash/);
-  });
-
   it("admin actions re-verify the admin cookie server-side", () => {
     const src = readRepo("src/app/actions.ts");
     // each of the two admin-content actions must gate on readAdminFlag()
     expect((src.match(/readAdminFlag\(\)/g) ?? []).length).toBeGreaterThanOrEqual(2);
   });
 
-  it("guest records are migrated to accounts explicitly, never implicitly shared", () => {
-    const src = readRepo("src/app/actions.ts");
-    expect(src).toMatch(/kind\s*===\s*"guest"/);
+  it("ships with no account or planner routes", () => {
+    const root = path.resolve(__dirname, "..");
+    expect(fs.existsSync(path.join(root, "src", "app", "account"))).toBe(false);
+    expect(fs.existsSync(path.join(root, "src", "app", "planner"))).toBe(false);
   });
 });
 

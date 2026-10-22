@@ -2,24 +2,6 @@
  * Persistence types (local mode). Mirrors `supabase/schema.sql`.
  */
 
-export type ActionItemKind =
-  | "identify-trusted-person"
-  | "prepare-questions"
-  | "plan-conversation"
-  | "revisit-lesson"
-  | "reflection"
-  | "custom-goal";
-
-export type ActionItem = {
-  id: string;
-  kind: ActionItemKind;
-  title: string;
-  detail: string;
-  done: boolean;
-  createdAt: string;
-  doneAt: string | null;
-};
-
 export type OnboardingAnswers = {
   goal: string;
   topics: string[];
@@ -53,17 +35,12 @@ export type LessonProgressRecord = {
 
 export type Profile = {
   id: string;
-  kind: "guest" | "account";
-  displayName?: string;
-  email?: string;
-  passwordHash?: string;
   createdAt: string;
   onboarding: OnboardingAnswers | null;
   lessonProgress: Record<string, LessonProgressRecord>;
   savedLessonIds: string[];
   quizAttempts: QuizAttemptRecord[];
   scenarioRuns: ScenarioRunRecord[];
-  actions: ActionItem[];
   preferences: { reduceMotion?: boolean };
 };
 

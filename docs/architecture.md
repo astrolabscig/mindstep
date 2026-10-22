@@ -21,7 +21,7 @@ src/
                   # scenario graph, directory filter, progress metrics.
     store/        # types.ts (shape, mirrors supabase/schema.sql) +
                   # file-store.ts (atomic local JSON persistence).
-    session.ts    # cookie/primitives/hash — the ONLY cookie module.
+    session.ts    # cookie + id primitives — the ONLY cookie module.
     env.ts        # the ONLY module reading env vars.
     server/       # profile.ts — resolves profile from cookie for RSCs.
   app/
@@ -34,9 +34,9 @@ docs/, scripts/seed.ts, tests/
 
 `data/mindstep-db.json` (shape in `src/lib/store/types.ts`):
 
-- `profiles: Record<profileId, Profile>` — id, kind (`guest` | `account`),
-  optional displayName/email/passwordHash (scrypt), onboarding, lessonProgress,
-  savedLessonIds, quizAttempts, scenarioRuns, actions, preferences.
+- `profiles: Record<profileId, Profile>` — id, onboarding, lessonProgress,
+  savedLessonIds, quizAttempts, scenarioRuns, preferences. There are no account,
+  email, password, or planner-record fields.
 - `verifications[]` — one entry per admin re-verification of a service.
 - `revisions[]` — append-only audit log for admin actions and seeds.
 - `overrides.unpublishedLessonIds[]` — publication overrides on content.
@@ -52,15 +52,13 @@ the seed script can change data under a running server.
    This is enforced by construction and statically tested
    (`tests/access-control.test.ts`: no server action signature takes a profile id;
    no Zod schema has a profileId field).
-2. Registered accounts store a random-salt scrypt hash with constant-time
-   comparison. `sanitiseProfile()` strips passwordHash before any client exposure.
+2. There is no registration, sign-in, or account record. Every visitor is a
+   browser-scoped guest with the same access to the full app.
 3. Admin state is a separate 8-hour httpOnly cookie `ms_admin`, granted only
    after a constant-time comparison against `ADMIN_KEY`. Every admin mutation
    (`adminSetLessonPublished`, `adminVerifyService`) re-checks `readAdminFlag()`
    server-side and appends to `revisions[]`.
-4. Sign-up migrates guest progress into the new account and deletes the guest
-   record; sign-in merges guest activity without overwriting completed entries.
-5. `deleteMyData()` resets the profile record for the session — the privacy
+4. `deleteMyData()` resets the profile record for the session — the privacy
    page exposes it directly.
 
 ## Learning loop (Understand → Practise → Next step)
@@ -85,8 +83,8 @@ are present. The intended production adapter (schema at `supabase/schema.sql`,
 types mirror it) still needs:
 
 1. A data-access layer swap behind `readDb/persist` (same function signatures).
-2. Real credentials + a deployment smoke test (register → refresh → persist).
+2. Real credentials + a deployment smoke test (open a card → refresh → persist).
 3. Re-verification of every claim in `docs/safety-and-privacy.md` in that mode.
 
 Because those credentials do not exist in this environment, no part of this
-submission claims cloud persistence.
+build claims cloud persistence.

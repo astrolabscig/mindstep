@@ -29,9 +29,8 @@ export default async function PrivacyPage() {
           <CardBody className="pt-5">
             <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-mist">
               <li><strong className="text-forest">Session cookie</strong> (<code>ms_sid</code>), a random id that links your browser to a saved record. HttpOnly, same-site, 90 days.</li>
-              <li><strong className="text-forest">Your activity</strong>: pages you opened, quiz scores and missed questions, practice runs, and planner items you write.</li>
-              <li><strong className="text-forest">If you register</strong>, your display name, email address, and a salted scrypt hash of your password (never the password itself).</li>
-              <li><strong className="text-forest">If you write a note in the planner</strong>, we store it exactly as you wrote it. Keep it free of anything you would not write in a shared notebook.</li>
+              <li><strong className="text-forest">Your activity</strong>: pages you opened, quiz scores and missed questions, and practice runs.</li>
+              <li><strong className="text-forest">No account details</strong>. There is no registration form, and MINDSTEP never asks for your name, email address, or a password.</li>
             </ul>
           </CardBody>
         </Card>
@@ -70,9 +69,9 @@ export default async function PrivacyPage() {
               <div>
                 <h3 className="text-[15px] font-semibold text-forest">Delete my data</h3>
                 <p className="mt-1 text-sm text-mist">
-                  Erases everything tied to your current session: pages opened, quiz scores,
-                  practice runs, notes, and planner items. The session cookie keeps its id, but the
-                  record behind it is reset. Nothing of yours remains.
+                  Erases everything tied to your current session: pages opened, quiz scores, and
+                  practice runs. The session cookie keeps its id, but the record behind it is reset.
+                  Nothing of yours remains.
                 </p>
                 {kind === "known" ? (
                   <div className="mt-3">
@@ -85,14 +84,6 @@ export default async function PrivacyPage() {
                   </p>
                 )}
               </div>
-              <div>
-                <h3 className="text-[15px] font-semibold text-forest">Sign out</h3>
-                <p className="mt-1 text-sm text-mist">
-                  Ends the session on this device (clears the cookie) from the{" "}
-                  <Link href="/account" className="underline">account page</Link>. Registered
-                  accounts keep their stored record until deleted.
-                </p>
-              </div>
             </div>
           </CardBody>
         </Card>
@@ -104,15 +95,15 @@ export default async function PrivacyPage() {
           Your progress is tied to your session cookie and looked up on the server only. No request
           from the browser can reach another visitor&apos;s record. People with the admin key can
           manage content (publishing cards, checking services) and see an audit log of those
-          actions, but not your planner notes. The full access design, its limitations, and the
+          changes, but not your learning progress. The full access design, its limitations, and the
           production upgrade path are in docs/safety-and-privacy.md in the repository.
         </p>
       </section>
 
       <Callout tone="caution" title="Limits in this build (honest scope)" className="mt-8">
-        This is a coursework demo running in local mode: single-file storage, no encryption at
-        rest, and a shared secret for admin access. It shows the design, not a certified production
-        deployment. Read docs/limitations.md before assuming any clinical, legal, or compliance use.
+        This is a local-mode demo: single-file storage, no encryption at rest, and a shared secret
+        for admin access. It shows the design, not a certified production deployment. Read
+        docs/limitations.md before assuming any clinical, legal, or compliance use.
       </Callout>
     </div>
   );

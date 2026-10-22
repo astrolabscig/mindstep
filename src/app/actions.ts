@@ -1,21 +1,17 @@
 "use server";
 
 import { z } from "zod";
-import { readDb, persist, ensureProfile } from "@/lib/store/file-store";
+import { readDb, persist, ensureProfile, deleteProfileData } from "@/lib/store/file-store";
 import type { Db } from "@/lib/store/types";
 import {
   readSessionProfileId,
   setSessionCookie,
   newProfileId,
-  newActionId,
   newRecordId,
-  hashPassword,
-  verifyPassword,
   validateAdminKey,
   readAdminFlag,
   setAdminCookie,
   clearAdminCookie,
-  clearSessionCookie,
 } from "@/lib/session";
 import { serviceById, questionById, questionsOfModule, moduleBySlug, lessonById, scenarioById } from "@/content";
 import { evaluateAnswer, scoreAttempt, missedQuestions, type AnsweredQuestion } from "@/lib/domain/quiz";
@@ -34,9 +30,10 @@ async function withProfile<T>(fn: (profileId: string, db: Db) => T): Promise<T> 
   const id = existing ?? newProfileId();
   const created = !existing;
   ensureProfile(db, id);
-  persist(db);
   if (created) await setSessionCookie(id);
-  return fn(id, db);
+  const result = fn(id, db);
+  persist(db);
+  return result;
 }
 
 /* ── Schemas ───────────────────────────────────────────────── */
@@ -61,20 +58,6 @@ const quizSubmissionSchema = z.object({
     .max(64),
 });
 
-const actionSchema = z.object({
-  kind: z.enum([
-    "identify-trusted-person",
-    "prepare-questions",
-    "plan-conversation",
-    "revisit-lesson",
-    "reflection",
-    "custom-goal",
-  ]),
-  title: z.string().trim().min(3).max(120),
-  detail: z.string().trim().max(2000).optional(),
-  actionId: z.string().optional(), // present when updating
-});
-
 const idSchema = z.string().min(2).max(80).regex(/^[a-zA-Z0-9_-]+$/);
 
 const scenarioRunSchema = z.object({
@@ -82,14 +65,6 @@ const scenarioRunSchema = z.object({
   worstQuality: z.enum(["best", "acceptable", "poor"]),
   walked: z.number().int().min(1).max(200),
 });
-
-const accountSchema = z.object({
-  displayName: z.string().trim().min(2).max(40),
-  email: z.string().trim().email().max(120),
-  password: z.string().min(8).max(72),
-});
-
-const signInSchema = z.object({ email: z.string().trim().email().max(120), password: z.string().min(1).max(72) });
 
 const adminKeySchema = z.object({ key: z.string().min(1).max(200) });
 
@@ -245,154 +220,14 @@ export async function recordScenarioRun(input: unknown): Promise<{ ok: boolean }
   return { ok: true };
 }
 
-/* ── Action planner ────────────────────────────────────────── */
+/* ── Data deletion ─────────────────────────────────────────── */
 
-export async function upsertAction(input: unknown): Promise<{ ok: boolean }> {
-  const parsed = actionSchema.safeParse(input);
-  if (!parsed.success) return { ok: false };
-  await withProfile((id, db) => {
-    const p = db.profiles[id];
-    if (parsed.data.actionId) {
-      const existing = p.actions.find((a) => a.id === parsed.data.actionId);
-      if (existing) {
-        existing.title = parsed.data.title;
-        existing.detail = parsed.data.detail ?? existing.detail;
-        existing.kind = parsed.data.kind;
-      }
-    } else {
-      p.actions.push({
-        id: newActionId(),
-        kind: parsed.data.kind,
-        title: parsed.data.title,
-        detail: parsed.data.detail ?? "",
-        done: false,
-        createdAt: new Date().toISOString(),
-        doneAt: null,
-      });
-    }
-  });
-  return { ok: true };
-}
-
-export async function toggleAction(actionId: string): Promise<{ ok: boolean }> {
-  if (!/^act_[a-z0-9]+$/.test(actionId)) return { ok: false };
-  await withProfile((id, db) => {
-    const a = db.profiles[id].actions.find((x) => x.id === actionId);
-    if (a) {
-      a.done = !a.done;
-      a.doneAt = a.done ? new Date().toISOString() : null;
-    }
-  });
-  return { ok: true };
-}
-
-export async function deleteAction(actionId: string): Promise<{ ok: boolean }> {
-  if (!/^act_[a-z0-9]+$/.test(actionId)) return { ok: false };
-  await withProfile((id, db) => {
-    const p = db.profiles[id];
-    p.actions = p.actions.filter((a) => a.id !== actionId);
-  });
-  return { ok: true };
-}
-
-/* ── Accounts (local mode) ─────────────────────────────────── */
-
-export async function registerAccount(input: unknown): Promise<{ ok: boolean; error?: string }> {
-  const parsed = accountSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "Please check your details (password must be at least 8 characters)." };
-  const db = readDb();
-  if (Object.values(db.profiles).some((p) => p.email?.toLowerCase() === parsed.data.email.toLowerCase())) {
-    return { ok: false, error: "An account with this email already exists. Sign in instead." };
-  }
-  const guestId = await readSessionProfileId();
-  const accountId = newProfileId();
-  db.profiles[accountId] = {
-    id: accountId,
-    kind: "account",
-    displayName: parsed.data.displayName,
-    email: parsed.data.email,
-    passwordHash: hashPassword(parsed.data.password),
-    createdAt: new Date().toISOString(),
-    onboarding: null,
-    lessonProgress: {},
-    savedLessonIds: [],
-    quizAttempts: [],
-    scenarioRuns: [],
-    actions: [],
-    preferences: {},
-  };
-  // Migrate any guest data into the new account
-  if (guestId && db.profiles[guestId]?.kind === "guest") {
-    const guest = db.profiles[guestId];
-    db.profiles[accountId].onboarding = guest.onboarding;
-    db.profiles[accountId].lessonProgress = guest.lessonProgress;
-    db.profiles[accountId].savedLessonIds = guest.savedLessonIds;
-    db.profiles[accountId].quizAttempts = guest.quizAttempts;
-    db.profiles[accountId].scenarioRuns = guest.scenarioRuns;
-    db.profiles[accountId].actions = guest.actions;
-    delete db.profiles[guestId];
-  }
-  persist(db);
-  await setSessionCookie(accountId);
-  return { ok: true };
-}
-
-export async function signIn(input: unknown): Promise<{ ok: boolean; error?: string }> {
-  const parsed = signInSchema.safeParse(input);
-  if (!parsed.success) return { ok: false, error: "Enter a valid email and password." };
-  const db = readDb();
-  const account = Object.values(db.profiles).find(
-    (p) => p.email?.toLowerCase() === parsed.data.email.toLowerCase() && p.passwordHash,
-  );
-  if (!account || !account.passwordHash || !verifyPassword(parsed.data.password, account.passwordHash)) {
-    return { ok: false, error: "Email or password is incorrect." };
-  }
-  const guestId = await readSessionProfileId();
-  const guest = guestId ? db.profiles[guestId] : undefined;
-  if (guest?.kind === "guest") {
-    // Merge guest progress into the signed-in account
-    for (const [lessonId, rec] of Object.entries(guest.lessonProgress)) {
-      if (!db.profiles[account.id].lessonProgress[lessonId] || rec.completed) {
-        db.profiles[account.id].lessonProgress[lessonId] = rec;
-      }
-    }
-    db.profiles[account.id].quizAttempts.push(...guest.quizAttempts);
-    db.profiles[account.id].scenarioRuns.push(...guest.scenarioRuns);
-    db.profiles[account.id].savedLessonIds = Array.from(
-      new Set([...db.profiles[account.id].savedLessonIds, ...guest.savedLessonIds]),
-    );
-    if (!db.profiles[account.id].onboarding) db.profiles[account.id].onboarding = guest.onboarding;
-    db.profiles[account.id].actions.push(...guest.actions);
-    if (guestId) delete db.profiles[guestId];
-    persist(db);
-  }
-  await setSessionCookie(account.id);
-  return { ok: true };
-}
-
-export async function signOut(): Promise<{ ok: boolean }> {
-  await clearSessionCookie();
-  return { ok: true };
-}
-
-/** Full data deletion: erases the profile bound to this session. */
+/** Erases the learning profile bound to this browser session. */
 export async function deleteMyData(): Promise<{ ok: boolean }> {
   const id = await readSessionProfileId();
   if (!id) return { ok: true };
   await withProfile((pid, db) => {
-    void pid;
-    db.profiles[id] = {
-      id,
-      kind: "guest",
-      createdAt: new Date().toISOString(),
-      onboarding: null,
-      lessonProgress: {},
-      savedLessonIds: [],
-      quizAttempts: [],
-      scenarioRuns: [],
-      actions: [],
-      preferences: {},
-    };
+    deleteProfileData(db, pid);
   });
   return { ok: true };
 }

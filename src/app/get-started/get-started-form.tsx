@@ -181,8 +181,8 @@ export default function GetStartedForm() {
                     </p>
                   </div>
                   <p className="text-sm text-mist">
-                    An account is <strong className="text-forest">not required</strong>. Your progress
-                    lives in this browser. You can save it to an account later from the dashboard.
+                    <strong className="text-forest">No account is needed.</strong> Your progress lives
+                    in this browser, and you can delete it at any time.
                   </p>
                 </div>
               </div>

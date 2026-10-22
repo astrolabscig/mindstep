@@ -162,7 +162,7 @@ export function LessonReader({ model }: { model: Model }) {
             Understanding is step one. Pick one concrete move, that&apos;s the whole point here.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <ButtonLink href="/planner" size="sm">Plan a conversation</ButtonLink>
+            <ButtonLink href="/scenarios" size="sm">Practise a conversation</ButtonLink>
             <ButtonLink href="/support" size="sm" variant="quiet">See real services</ButtonLink>
             <ButtonLink href={`/quiz/${lesson.moduleId}`} size="sm" variant="quiet">Full module check</ButtonLink>
           </div>

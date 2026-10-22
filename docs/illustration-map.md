@@ -57,7 +57,7 @@ tints. White remains white for the illustrations' negative space.
 | `role-play` | `/art/role-play.svg` | [Casual chat](https://undraw.co/illustration/casual-chat_4byz) | Scenarios header and scenario card fallback | Illustration: two people talking on a bench, practising a conversation |
 | `support-connection` | `/art/support-connection.svg` | [Showing support](https://undraw.co/illustration/showing-support_ixfc) | Support header, search empty state, landing support section | Illustration: two people holding a phone with a heart, finding support together |
 | `research-notes` | `/art/research-notes.svg` | [Researching](https://undraw.co/illustration/researching_49yy) | Research header and landing research section | Illustration: a person checking documents with a magnifying glass |
-| `plan-steps` | `/art/plan-steps.svg` | [To-do list](https://undraw.co/illustration/to-do-list_o3jf) | Planner header and empty state | Illustration: a person with a clipboard, planning small steps |
+| `plan-steps` | `/art/plan-steps.svg` | [To-do list](https://undraw.co/illustration/to-do-list_o3jf) | Explainer loop, stage 2 | Illustration: a person with a clipboard, planning small steps |
 | `safety-net` | `/art/safety-net.svg` | [Safe](https://undraw.co/illustration/safe_0mei) | Safety page header, trauma/PTSD card | Illustration: a person with a secure folder, representing safety and privacy |
 | `hero-calm` | `/art/hero-calm.svg` | [Step to the sun](https://undraw.co/illustration/step-to-the-sun_wp49) | Landing hero | Illustration: a person holding a sun, representing a hopeful next step |
 | `loop` | `/art/loop.svg` | [Completed steps](https://undraw.co/illustration/completed-steps_ngu7) | Landing "How MINDSTEP works" header | Illustration: a person moving through a short checklist of steps |
@@ -96,7 +96,6 @@ use only the unDraw art above. Each stage cross-fades to the next; with
 - **Support** (`/support`): header illustration and search empty-state art.
 - **Progress** (`/progress`): header illustration plus quiz/review empty-state
   art.
-- **Planner** (`/planner`): header illustration plus empty-state art.
 - **Safety** (`/safety`): header illustration.
 - **Research** (`/research`): header illustration.
 

@@ -13,7 +13,6 @@ const navItems = [
   { href: "/topics", label: "Topics" },
   { href: "/scenarios", label: "Practice" },
   { href: "/support", label: "Support" },
-  { href: "/planner", label: "Planner" },
 ];
 
 export function SiteHeader() {

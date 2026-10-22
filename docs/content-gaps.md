@@ -43,7 +43,7 @@ Open items after the content-lead replacement (2026-10-19).
 ## Legacy deletion (next pass)
 - `/learn`, `/lesson/*`, `/quiz/*`, `/progress`, `/get-started` are unlinked but live
   for the demo. After the panel demo: delete routes + legacy tests, keep `/topics`,
-  `/scenarios`, `/support`, `/planner`, `/safety`, `/account`.
+  `/scenarios`, `/support`, `/safety`, `/privacy`, `/research`.
 
 ## Verification checklist (status)
 - [x] No duplicate topic content — one best version per topic in `cards.ts`

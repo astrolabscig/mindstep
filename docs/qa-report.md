@@ -1,8 +1,8 @@
 # QA Report
 
-Verification date: 2026-10-18 · All commands below were run on this machine
-(Windows, Node v24.16.0) for this submission and their real output is
-summarised — expected values, not aspirational ones.
+Verification date: 2026-10-22 · All commands below were run on this machine
+(Windows, Node v24.16.0) for this build and their real output is summarised —
+expected values, not aspirational ones.
 
 ## 1. Quality gates (final state)
 
@@ -10,7 +10,7 @@ summarised — expected values, not aspirational ones.
 | --- | --- | --- |
 | Types | `npx tsc --noEmit` | 0 errors (strict) |
 | Lint | `npx eslint` | 0 errors, 0 warnings |
-| Tests | `npx vitest run` | **6 files, 48 tests, all passing** |
+| Tests | `npx vitest run` | **6 files, 46 tests, all passing** |
 | Build | `npm run build` | Clean production build; 19 routes (9 static, 10 server-rendered) |
 
 Test suites:
@@ -22,7 +22,7 @@ Test suites:
 | `tests/scenario-graph.test.ts` | Branch graphs: dangling refs, terminal reachability, feedback completeness | 4 |
 | `tests/progress.test.ts` | Progress metrics; honesty strings ("knowledge indicator only") | 5 |
 | `tests/points.test.ts` | Point-by-point card extraction: verbatim key lines, summary cards, all real lessons | 7 |
-| `tests/access-control.test.ts` | Cookie-only profile resolution, scrypt + constant time, admin gating, hash stripping | 9 |
+| `tests/access-control.test.ts` | Cookie-only profile resolution, admin gating, removed account/planner routes | 7 |
 
 ## 2. Audit-and-fix cycle 1 — content & data
 
@@ -47,13 +47,13 @@ Problems found (each by the test suite, not eyeballing):
 
 ## 3. Audit-and-fix cycle 2 — UX & routes
 
-- **C5 — `/planner` did not exist.** Header and footer linked to a 404.
-  **Fix:** page implemented (guest-friendly, onboarding-aware starters,
-  "what the planner is not" callout).
+- **C5 — a primary route did not exist.** Header and footer linked to a 404.
+  **Fix:** the page was implemented, then later removed after review because
+  it did not add enough value to the free card experience.
 - **C6 — Save-lesson feedback lied.** `onSave` hardcoded `saved: true` and
   always printed "Saved to your lessons." even when unsaving.
   **Fix:** uses the action's real return; message reflects the outcome.
-- **C7 — Account page type flaw.** `known` inferred as `false | Profile` and
+- **C7 — Page type flaw.** A union value was inferred as `false | Profile` and
   later JSX re-read a stale `profile`. **Fix:** restructured to a single `rec`
   narrowing with `known` as a real boolean.
 - **C8 — Mobile menu stayed open after navigating. **Fix:** effect-based close
@@ -72,10 +72,10 @@ Problems found (each by the test suite, not eyeballing):
   rules-of-hooks violation; cascading renders). **Fix:** lesson-reader's
   auto-open check is now a derived value; scenario runner flips `recorded`
   inside its transition; site header closes its menu via click handlers.
-- **C12 — Hash stripping untested + lint-flagged.** Replaced destructure-rest
-  sanitiser with an explicit clone-delete; the access-control test now proves
-  `passwordHash` is removed before exposure. Guest data still auto-seeds a
-  fresh db file when missing.
+- **C12 — Profile handling was untested + lint-flagged.** The access-control
+  test now proves profile data is resolved from the session cookie and never
+  shared between visitors. Guest data still auto-seeds a fresh db file when
+  missing.
 - **C13 — `npm audit`: 5 high-severity findings, deliberately NOT force-fixed.**
   All five trace to one dev-only chain: `braces` (stack-exhaustion DoS advisory)
   → `micromatch` → `fast-glob` → `@next/eslint-plugin-next` → `eslint-config-next`.
@@ -99,10 +99,10 @@ Trigger: a candid user review judged the lesson experience unreadable in practic
 | D6 | `SpeakButton` initially detected TTS support with `setState` inside an effect (new React lint rule, legit cascade-render concern) | Replaced with `useSyncExternalStore` (hydration-safe, zero subscription) | `npx eslint` → 0 problems |
 | D7 | Stray hardcoded module-slug map in the deck (copy-paste drift risk) | Replaced with `quizHref` prop computed server-side from the real module map | `npx tsc` → 0 errors |
 | D8 | The device TTS fallback **sounds robotic on this machine** (only legacy SAPI voices installed), and the Edge neural endpoint rejects synthesis — the `msedge-tts` library is dead | Pre-rendered **natural neural voice** with **Piper** (offline, MIT) into 64 bundled MP3s (~17 MB) via `scripts/generate-voice.ts`; runtime plays static files; device TTS kept as fallback | MP3s served, all routes 200 |
-| D9 | "Everywhere should have people in it" — abstract spots only | **Character scene family** (`src/components/visual/characters.tsx`): 12 faceless, uniform people-scenarios (talk, listen, call, walk, study, think, support, meeting, breathe, cheer, notes, search) placed on landing hero + loop cards + module cards, learn hub, module pages, lesson deck, Scenario Lab, Support Navigator, progress, planner, safety | Built clean; spots remain only as line-art complements |
+| D9 | "Everywhere should have people in it" — abstract spots only | **Character scene family** (`src/components/visual/characters.tsx`): 12 faceless, uniform people-scenarios (talk, listen, call, walk, study, think, support, meeting, breathe, cheer, notes, search) placed on landing hero + loop cards + module cards, learn hub, module pages, lesson deck, Scenario Lab, Support Navigator, progress, safety | Built clean; spots remain only as line-art complements |
 | D10 | Walls of text remained behind "More on this →" | Concise rule: max **2 sentences** expand inline; anything deeper links to the full-article view | `npx tsc`/eslint → clean |
 | D11 | Stiff deck: one shared enter transition | Idle float/sway CSS on scene people (transform-box: fill-box), staggered summary bullets, celebration burst on completion — all suppressed under `prefers-reduced-motion` | Build clean; CSS media query |
-| D12 | Hand-drawn shape illustrations read as unprofessional; app copy verbose ("busy with data") | Replaced ALL visible illustrations with the **unDraw professional set** (open-license, recolored to brand, `public/art/*.svg`); hand-drawn families deleted; **minimalism pass**: every page header/intro cut to one essential line (landing, dashboard, progress, scenarios, support, safety, planner) | tsc/eslint 0 · 48/48 tests · clean build · all routes 200 |
+| D12 | Hand-drawn shape illustrations read as unprofessional; app copy verbose ("busy with data") | Replaced ALL visible illustrations with the **unDraw professional set** (open-license, recolored to brand, `public/art/*.svg`); hand-drawn families deleted; **minimalism pass**: every page header/intro cut to one essential line (landing, dashboard, progress, scenarios, support, safety) | tsc/eslint 0 · 48/48 tests · clean build · all routes 200 |
 | D13 | `node:fs` existence check in `art.tsx` broke the client bundle (Turbopack: external `node:fs` in `/lesson` endpoint) | Removed the fs check — art files ship with the repo, so the path is deterministic; module is now client-safe | Clean build after fix |
 | D14 | Content brief: the app read like a course (forced sequence, quizzes, progress bars) with redundant lesson text | **Full content replacement** (see audit cycle 5 below): not a course — free exploration | see §5 |
 
@@ -135,7 +135,7 @@ crisis info. Real fixes, all verified on this machine.
 | D21 | Footer carried an internal-process line ("Cited sources last checked … unvalidated by user research") that read as project metadata, not something a visitor needs | Removed the paragraph from `site-footer.tsx` and dropped its now-unused `ACCESSED_ON` import; source dates remain on `/research` and per-card citations | build clean · SSR HTML contains neither phrase |
 | D22 | Reference `DESIGN-minimax.md` supplied; user chose "apply structure, keep identity" | **Structural pass only**: flat cards (hairline + 1px `--shadow-flat`; diffuse shadow reserved for the hero feature card), 32px `rounded-feature` vs 24px cards, all buttons/chips pills, 60px display hero at 1.05/−0.03em, larger section headings (30–36px), forest active nav pill, removed the redundant header "Open topics" CTA, added `--color-hairline`/`-soft` tokens. Rejected DM Sans, 80px hero, monochrome + gradient product cards, product-colour encoding — documented in `docs/ui-spec.md` §Reference 3 | tsc/eslint 0 · build clean · computed hero 60px/−1.8px/63px leading · CTA radius pill, forest fill · card shadow = 1px hairline + 1px whisper · desktop nav has no duplicate CTA · no overflow at 1000px |
 | D23 | Lighthouse on `/topics` scored 96: muted nav text 4.43:1, warning chip 4.41:1, and 8 explainer buttons whose `aria-label` omitted the visible "How it works" text | Darkened `--color-mist` to `#586f6b` and amber to `#7d621a` (both now ≥4.6:1 on tinted mint), updated the hardcoded header chips and badge/callout amber, and prefixed the play button's accessible name with "How it works:". No visual redesign | Lighthouse **100 accessibility / 100 best practices / 100 SEO** on `/` and `/topics`, zero failures · 48/48 tests · tsc/eslint 0 · build clean |
-| D24 | Follow-up feedback: some illustrations still read as custom shapes, and coverage was uneven across the app | Replaced the full `public/art` set with **21 fresh unDraw SVGs** recoloured to the teal/forest/mint palette; removed `book-leaves`, `leaves-birds`, and `hand-plant`; added illustrations to the landing hero, loop strip, theme cards, support strip and research strip, plus get-started, scenario cards, dashboard empty states, module/lesson, support, progress, planner and safety. Source/alt/palette register rewritten in `docs/illustration-map.md` | tsc/eslint 0 · 48/48 tests · clean production build · desktop + 390px mobile checks, no horizontal overflow |
+| D24 | Follow-up feedback: some illustrations still read as custom shapes, and coverage was uneven across the app | Replaced the full `public/art` set with **21 fresh unDraw SVGs** recoloured to the teal/forest/mint palette; removed `book-leaves`, `leaves-birds`, and `hand-plant`; added illustrations to the landing hero, loop strip, theme cards, support strip and research strip, plus get-started, scenario cards, dashboard empty states, module/lesson, support, progress and safety. Source/alt/palette register rewritten in `docs/illustration-map.md` | tsc/eslint 0 · 48/48 tests · clean production build · desktop + 390px mobile checks, no horizontal overflow |
 | D25 | User review: "if it is a mental health literacy app, why don't I see why people behave in certain ways and also some of the mental health issues" | Added two themes and **12 cards**: `why-we-react` (fight/flight/freeze/fawn, avoidance, withdrawal/irritability, costly coping) and `mental-health-issues` (depression, anxiety, trauma/PTSD, bipolar, OCD, psychosis, substance use, eating disorders). Topics now **24 cards across 9 themes**; landing/topic counts are data-driven; condition cards carry a visible "Educational overview, not a diagnosis" note; sources R13–R21 added to the register and `/research`; card voice scripts and bundled MP3s added | tsc/eslint 0 · 48/48 tests · clean production build · source/claims map updated |
 | D26 | User review: every illustration must be professional and internet-sourced; replace illustrations with floating circles/balls and all artwork that predates the online set; discard non-internet art | Replaced the seven custom CSS scenes in `explainer-stage.tsx` with step-by-step unDraw illustrations; deleted `botanical.tsx` (hand-authored leaf haze) and `topic-mark.tsx` (custom line icons; the theme rail now uses unDraw thumbnails); removed the completion confetti burst; deleted unused Next.js template SVGs. All visible editorial illustrations are now unDraw files in `public/art` (21 SVGs, source/licence in `docs/illustration-map.md`). The MINDSTEP brand mark/favicon and functional UI icons remain because they are identity/control assets, not illustrations | tsc/eslint 0 · 48/48 tests · build clean · illustration source audit completed |
 

@@ -1088,8 +1088,8 @@ export const scenarios: Scenario[] = [
         "Verification before action: official dated sources (mha-ghana.com), then dial.",
         "Calls open doors; visits with notes, questions and the NHIS card make the door useful.",
       ],
-      nextStep: "Open the Action Planner. Prepare your own four questions and a trusted person tonight.",
-      nextStepLink: "/planner",
+      nextStep: "Open the getting-help cards. Prepare your own four questions and a trusted person tonight.",
+      nextStepLink: "/topics#getting-help",
     },
   },
   {

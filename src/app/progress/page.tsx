@@ -7,7 +7,6 @@ import {
   scenariosPractised,
   scenariosTotal,
   reviewQueueLessonIds,
-  goalsCompleted,
   metricExplanations,
 } from "@/lib/domain/progress";
 import { lessons } from "@/content/lessons";
@@ -31,7 +30,6 @@ export default async function ProgressPage() {
     lessonProgress: profile?.lessonProgress ?? {},
     quizAttempts: profile?.quizAttempts ?? [],
     scenarioRuns: profile?.scenarioRuns ?? [],
-    actions: profile?.actions ?? [],
   };
 
   // Missed questions grouped by module feeds the review queue.
@@ -46,8 +44,6 @@ export default async function ProgressPage() {
   const scores = topicScores(p);
   const practised = scenariosPractised(p);
   const queue = reviewQueueLessonIds(p, missedByModule);
-  const goals = goalsCompleted(p);
-  const totalActions = p.actions.length;
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
@@ -65,16 +61,14 @@ export default async function ProgressPage() {
       </header>
 
       {kind === "anonymous" ? (
-        <Callout tone="note" title="You are browsing as a guest" className="mt-6">
-          Progress starts saving in this browser as soon as you complete an activity.
-          <div className="mt-2">
-            <ButtonLink href="/account" size="sm" variant="quiet">Sign in or create an account to keep it</ButtonLink>
-          </div>
+        <Callout tone="note" title="No account needed" className="mt-6">
+          Progress starts saving in this browser as soon as you open a card or finish an activity.
+          There is nothing to sign up for.
         </Callout>
       ) : null}
 
       {/* Headline metrics */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <MetricCard
           label="Lessons completed"
           value={done}
@@ -88,13 +82,6 @@ export default async function ProgressPage() {
           suffix={`of ${scenariosTotal()}`}
           explanation={metricExplanations.scenariosPractised}
           progress={{ value: practised, max: scenariosTotal(), text: `${practised} of ${scenariosTotal()} conversations taken to the end` }}
-        />
-        <MetricCard
-          label="Planner items done"
-          value={goals}
-          suffix={totalActions === 1 ? "of 1 added" : `of ${totalActions} added`}
-          explanation={metricExplanations.goalsCompleted}
-          progress={totalActions > 0 ? { value: goals, max: totalActions, text: `${goals} of ${totalActions} planner items marked done` } : undefined}
         />
       </div>
 
@@ -201,7 +188,7 @@ export default async function ProgressPage() {
         </section>
       ) : null}
 
-      {/* Honesty note (assignment requirement) */}
+      {/* Honesty note */}
       <Callout tone="caution" title="What this page is not" className="mt-10">
         These numbers describe what you have opened and finished. They are not wellbeing scores,
         they cannot detect a mental health condition, and MINDSTEP does not monitor anyone. If you
